@@ -7,6 +7,7 @@ Installeer de deps met:
 composer install --dev
 npm install --include=dev
 php artisan key:generate
+php artisan migrate
 ```
 
 Je kan het project uitvoeren met:
