@@ -4,6 +4,7 @@
 
 Installeer de deps met:
 ```shell
+cp .env.example .env
 composer install --dev
 npm install --include=dev
 php artisan key:generate
