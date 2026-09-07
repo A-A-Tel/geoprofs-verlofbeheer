@@ -4,9 +4,9 @@
 
 Installeer de deps met:
 ```shell
-composer install --dev;
-npm install --include=dev;
-php artisan key:generate;
+composer install --dev
+npm install --include=dev
+php artisan key:generate
 ```
 
 Je kan het project uitvoeren met:
