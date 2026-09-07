@@ -22,7 +22,7 @@ Met deze commando's kun je de code standaardiseren.
 
 PHP:
 ```shell
-php ./vendor/bin/pint;
-npm run format:check;
-npm run lint:check;
+php ./vendor/bin/pint
+npm run format:check
+npm run lint:check
 ```
