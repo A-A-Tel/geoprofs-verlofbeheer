@@ -15,6 +15,20 @@
     --text-secondary: #000000;
 }
 
+@font-face {
+    font-family: 'Inter Variable';
+    src: url('../fonts/Inter.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter Italic';
+    src: url('../fonts/Inter-Italic.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
 @theme {
     --color-accent: var(--accent);
     --color-accent-bad: var(--action-bad);
@@ -28,6 +42,9 @@
     --color-secondary: var(--secondary);
     --color-text-primary: var(--text-primary);
     --color-text-secondary: var(--text-secondary);
+    --font-sans: 'Inter Variable', sans-serif;
+    --font-serif: 'Inter Variable', sans-serif;
+    --font-italic: 'Inter Italic', sans-italic;
 }
 
 body {
