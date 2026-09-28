@@ -1,4 +1,3 @@
-
 export function LoginModal() {
     return (
         <div className={`grid h-screen w-full items-center`}>
@@ -17,7 +16,12 @@ export function LoginModal() {
                     <div>Wachtwoord</div>
                     <input placeholder={'*******'} type={'password'} className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'} />
                 </div>
-                <button type={"submit"} className={'bg-background cursor-pointer border-text-secondary flex items-center justify-center rounded-md border-2 p-2 font-bold'}>
+                <button
+                    type={'submit'}
+                    className={
+                        'bg-background border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold'
+                    }
+                >
                     Inloggen
                 </button>
             </form>
