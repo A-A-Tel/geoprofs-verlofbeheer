@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id')->primary();
             $table->foreignId('parent_id')->nullable()->constrained('roles')->nullOnDelete();
             $table->string('name', 32);
             $table->timestamps();

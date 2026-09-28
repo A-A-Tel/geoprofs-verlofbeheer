@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->constrained('roles');
             $table->foreignId('department_id')->constrained('departments');
+            $table->foreignId('supervisor_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('email', 254)->unique();
             $table->string('password', 255);
             $table->rememberToken();
