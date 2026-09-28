@@ -45,5 +45,11 @@ class RoleSeeder extends Seeder
         $office_manager->parent()->associate($employee);
 
         $administrator->parent()->associate($employee);
+
+        $employee->save();
+        $manager->save();
+        $department_manager->save();
+        $office_manager->save();
+        $administrator->save();
     }
 }

@@ -15,14 +15,14 @@ class DepartmentSeeder extends Seeder
     {
         Department::create([
             'name' => 'ICT',
-        ]);
+        ])->save();
 
         Department::create([
             'name' => 'Office',
-        ]);
+        ])->save();
 
         Department::create([
             'name' => 'Geodesy',
-        ]);
+        ])->save();
     }
 }

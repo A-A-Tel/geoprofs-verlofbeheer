@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserData extends Model
 {
@@ -12,7 +13,8 @@ class UserData extends Model
         'phone_number',
         'citizen_service_number',
         'started_service_on',
-        'annual_leave_days'
+        'annual_leave_days',
+        'remaining_leave',
     ];
 
     protected $hidden = [
@@ -20,4 +22,9 @@ class UserData extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
