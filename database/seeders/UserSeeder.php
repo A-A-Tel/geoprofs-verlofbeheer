@@ -30,8 +30,9 @@ class UserSeeder extends Seeder
 
 
         $userSetting = new UserSetting();
-        $userSetting->user()->associate($user);
 
+        $userSetting->user()->associate($user);
+        $userSetting->save();
 
         $userData = new UserData([
             'first_name' => 'Regu',
