@@ -8,13 +8,15 @@ use Symfony\Component\HttpFoundation\Response as Codes;
 
 class AuthController extends Controller
 {
-    public function login(LoginRequest $request): Response {
+    public function login(LoginRequest $request): Response
+    {
         $data = $request->validated();
         $success = auth()->attempt($data);
 
         if ($success) {
             return response(null, Codes::HTTP_NO_CONTENT);
         }
+
         return response(null, Codes::HTTP_UNAUTHORIZED);
     }
 }

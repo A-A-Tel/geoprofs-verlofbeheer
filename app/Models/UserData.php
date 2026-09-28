@@ -20,7 +20,7 @@ class UserData extends Model
     protected $hidden = [
         'citizen_service_number',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     public function user(): BelongsTo

@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\UserData;
 use App\Models\UserSetting;
 use App\RoleLevel;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Date;
 
@@ -21,15 +20,14 @@ class UserSeeder extends Seeder
     {
         $user = new User([
             'email' => 'regu.larjoe@bedrijf.nl',
-            'password' => 'Hallo12345%'
+            'password' => 'Hallo12345%',
         ]);
 
         $user->role()->associate(Role::findOrFail(RoleLevel::Employee));
         $user->department()->associate(Department::where('name', 'Geodesy')->firstOrFail());
         $user->save();
 
-
-        $userSetting = new UserSetting();
+        $userSetting = new UserSetting;
 
         $userSetting->user()->associate($user);
         $userSetting->save();
@@ -41,7 +39,7 @@ class UserSeeder extends Seeder
             'citizen_service_number' => '987654321',
             'started_service_on' => Date::now(),
             'annual_leave_days' => 30,
-            'remaining_leave' => 30
+            'remaining_leave' => 30,
         ]);
 
         $userData->user()->associate($user);

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\RoleLevel;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -16,27 +15,27 @@ class RoleSeeder extends Seeder
     {
         $office_manager = Role::create([
             'id' => RoleLevel::OfficeManager,
-            'name' => 'Officemanager'
+            'name' => 'Officemanager',
         ]);
 
         $department_manager = Role::create([
             'id' => RoleLevel::DepartmentManager,
-            'name' => 'Afdelingsleider'
+            'name' => 'Afdelingsleider',
         ]);
 
         $manager = Role::create([
             'id' => RoleLevel::Manager,
-            'name' => 'Manager'
+            'name' => 'Manager',
         ]);
 
         $administrator = Role::create([
             'id' => RoleLevel::Administrator,
-            'name' => 'Administrator'
+            'name' => 'Administrator',
         ]);
 
         $employee = Role::create([
             'id' => RoleLevel::Employee,
-            'name' => 'Medewerker'
+            'name' => 'Medewerker',
         ]);
 
         $manager->parent()->associate($employee);
