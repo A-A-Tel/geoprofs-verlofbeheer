@@ -1,5 +1,5 @@
-import { PageProps as InertiaPageProps } from '@inertiajs/core';
 import { Auth } from '@/types/inertia';
+import { PageProps as InertiaPageProps } from '@inertiajs/core';
 
 export interface User {
     id: number;
@@ -8,7 +8,7 @@ export interface User {
 }
 
 export type SharedData = {
-    auth: Auth|null
+    auth: Auth | null;
 };
 
-export type PageProps<T extends Record<string, any> = Record<string, any>> = InertiaPageProps & SharedData & T;
+export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = InertiaPageProps & SharedData & T;

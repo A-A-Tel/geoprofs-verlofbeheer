@@ -4,7 +4,6 @@ import {
     defineConfig
 } from 'vite';
 import tailwindcss from "@tailwindcss/vite";
-import caseShift from 'inertia-caseshift/vite';
 
 export default defineConfig({
     plugins: [
