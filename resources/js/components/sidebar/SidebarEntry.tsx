@@ -1,16 +1,14 @@
 import { Form, usePage } from '@inertiajs/react';
 import SvgIcon from '@mui/material/SvgIcon';
 
-type SidebarEntryProps = {
+export type SidebarEntryProps = {
     method?: 'get' | 'post';
     action: string;
     icon: typeof SvgIcon;
 };
 
-export default function SidebarEntry({ method = 'get', action, icon: Icon } : SidebarEntryProps) {
-    const {
-        url
-    } = usePage();
+export function SidebarEntry({ method = 'get', action, icon: Icon }: SidebarEntryProps) {
+    const { url } = usePage();
 
     const isActive = url === action;
     return (
