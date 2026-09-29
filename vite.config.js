@@ -4,6 +4,7 @@ import {
     defineConfig
 } from 'vite';
 import tailwindcss from "@tailwindcss/vite";
+import caseShift from 'inertia-caseshift/vite';
 
 export default defineConfig({
     plugins: [
@@ -12,6 +13,7 @@ export default defineConfig({
             ssr: 'resources/js/ssr.jsx',
             refresh: true,
         }),
+        caseShift(),
         react(),
         tailwindcss(),
     ],

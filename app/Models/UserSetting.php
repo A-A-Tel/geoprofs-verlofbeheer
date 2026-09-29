@@ -17,6 +17,13 @@ class UserSetting extends Model
         'notification_sound',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'notification_sound' => 'boolean',
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

@@ -1,3 +1,7 @@
+import { UserSettings, UserData, Role } from '@/types/types';
+
 export type Auth = {
-    user: null;
+    data: UserData
+    settings: UserSettings
+    role: Role
 };
