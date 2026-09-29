@@ -10,6 +10,7 @@ use Spatie\Activitylog\Support\LogOptions;
 class Role extends Model
 {
     use LogsActivity;
+
     protected $fillable = [
         'id',
         'name',
