@@ -13,6 +13,7 @@ class Role extends Model
     ];
 
     protected $hidden = [
+        'parent_id',
         'created_at',
         'updated_at',
     ];
