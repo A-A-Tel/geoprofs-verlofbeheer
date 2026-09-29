@@ -1,4 +1,4 @@
-import { UserSettings, UserData, Role } from '@/types/types';
+import { UserSettings, UserData, Role } from '@/types';
 
 export type Auth = {
     data: UserData
