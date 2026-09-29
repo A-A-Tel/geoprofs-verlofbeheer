@@ -7,9 +7,9 @@ use App\Models\Role;
 use App\Models\User;
 use App\RoleLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Date;
 
 /**
  * @extends Factory<User>
@@ -21,6 +21,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         var_dump(Role::all()->toArray());
+
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make('password'),
@@ -41,7 +42,7 @@ class UserFactory extends Factory
             $user->data()->create([
                 'first_name' => $this->faker->firstName(),
                 'last_name' => $this->faker->lastName(),
-                'phone_number' => '+3106' . Str::password(8, letters: false, numbers: true, symbols: false, spaces: false),
+                'phone_number' => '+3106'.Str::password(8, letters: false, numbers: true, symbols: false, spaces: false),
                 'citizen_service_number' => Str::password(9, letters: false, numbers: true, symbols: false, spaces: false),
                 'started_service_on' => Date::now(),
                 'annual_leave_days' => 30,
@@ -55,7 +56,7 @@ class UserFactory extends Factory
         return $this->state([
             'email' => 'regu.larjoe@bedrijf.nl',
             'password' => Hash::make('Hallo12345%'),
-            'department_id' => fn () => Department::where([ 'name' => 'Geodesy' ])->firstOrFail()->id,
+            'department_id' => fn () => Department::where(['name' => 'Geodesy'])->firstOrFail()->id,
         ])->afterCreating(function (User $user) {
             $user->data()->update([
                 'first_name' => 'Regu',
