@@ -20,7 +20,6 @@ class UserFactory extends Factory
 
     public function definition(): array
     {
-        var_dump(Role::all()->toArray());
 
         return [
             'email' => $this->faker->unique()->safeEmail(),

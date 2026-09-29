@@ -16,9 +16,10 @@ class AuthController extends Controller
 
         if ($success) {
             activity('auth')
+                ->event('auth.login')
                 ->performedOn(Auth::user())
                 ->withProperties(['ip' => $request->getClientIp()])
-                ->log('logged_in');
+                ->log('User logged in');
 
             return redirect()->route('dashboard');
         }
@@ -31,12 +32,13 @@ class AuthController extends Controller
         $user = Auth::user();
 
         if ($user) {
-            Auth::logout();
-
             activity('auth')
+                ->event('auth.logout')
                 ->performedOn($user)
                 ->withProperties(['ip' => $request->getClientIp()])
-                ->log('logged_out');
+                ->log('User logged out');
+
+            Auth::logout();
         }
 
         return redirect()->route('login');
