@@ -13,7 +13,7 @@ export type UserData = {
 }
 
 export type UserSettings = {
-    notification_sound: boolean
+    notificationSound: boolean
 }
 
 export type Role = {

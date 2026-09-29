@@ -1,5 +1,6 @@
 import '../css/app.css';
-import { transformInitialPage } from 'inertia-caseshift'
+import { http } from '@inertiajs/core';
+import { setupCaseShift, transformInitialPage } from 'inertia-caseshift';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
@@ -10,6 +11,8 @@ declare global {
 }
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+setupCaseShift(http);
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

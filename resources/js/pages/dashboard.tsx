@@ -1,12 +1,10 @@
 import { Sidebar } from '@/components/sidebar';
-import { usePage } from '@inertiajs/react';
+import { useTypedPage } from '@/hooks/typedPage';
 
 export default function Dashboard() {
-    const {
-        props
-    } = usePage();
+    const { props } = useTypedPage();
 
-    console.log(props.auth?.user)
+    console.log(props.auth?.user);
 
     return (
         <>

@@ -1,5 +1,6 @@
-import { Form, usePage } from '@inertiajs/react';
+import { Form } from '@inertiajs/react';
 import SvgIcon from '@mui/material/SvgIcon';
+import { useTypedPage } from '@/hooks/typedPage';
 
 export type SidebarEntryProps = {
     method?: 'get' | 'post';
@@ -8,7 +9,7 @@ export type SidebarEntryProps = {
 };
 
 export function SidebarEntry({ method = 'get', action, icon: Icon }: SidebarEntryProps) {
-    const { url } = usePage();
+    const { url } = useTypedPage();
 
     const isActive = url === action;
     return (
