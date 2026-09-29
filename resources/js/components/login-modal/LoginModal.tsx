@@ -1,4 +1,4 @@
-import { Form, usePage } from '@inertiajs/react';
+import { Form } from '@inertiajs/react';
 
 export function LoginModal() {
     return (
@@ -14,9 +14,19 @@ export function LoginModal() {
                 </div>
                 <div className={'grid flex-col gap-2'}>
                     <div>Email</div>
-                    <input name='email' placeholder={'regu.larjoe@bedrijf.nl'} type={'email'} className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'} />
+                    <input
+                        name="email"
+                        placeholder={'regu.larjoe@bedrijf.nl'}
+                        type={'email'}
+                        className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
+                    />
                     <div>Wachtwoord</div>
-                    <input name='password' placeholder={'*******'} type={'password'} className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'} />
+                    <input
+                        name="password"
+                        placeholder={'*******'}
+                        type={'password'}
+                        className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
+                    />
                 </div>
                 <button
                     type={'submit'}
