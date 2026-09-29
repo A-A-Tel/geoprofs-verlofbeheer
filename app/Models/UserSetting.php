@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserSetting extends Model
 {
     protected $hidden = [
+        'id',
+        'two_factor_enabled',
         'user_id',
         'created_at',
         'updated_at',

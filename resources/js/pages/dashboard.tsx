@@ -6,7 +6,7 @@ export default function Dashboard() {
         props
     } = usePage();
 
-    console.log(props.auth)
+    console.log(props.auth?.user)
 
     return (
         <>

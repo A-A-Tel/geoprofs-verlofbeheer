@@ -13,7 +13,6 @@ export default defineConfig({
             ssr: 'resources/js/ssr.jsx',
             refresh: true,
         }),
-        caseShift(),
         react(),
         tailwindcss(),
     ],

@@ -1,7 +1,7 @@
 import { UserSettings, UserData, Role } from '@/types';
 
 export type Auth = {
-    data: UserData
+    user: UserData
     settings: UserSettings
     role: Role
 };
