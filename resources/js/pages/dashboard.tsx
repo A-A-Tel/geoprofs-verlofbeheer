@@ -1,9 +1,9 @@
-import { Hello } from '@/components/hello';
+import { Sidebar } from '@/components/sidebar';
 
 export default function Dashboard() {
     return (
         <>
-            <Hello text={'Hello, world!'} />
+            <Sidebar></Sidebar>
         </>
     );
 }
