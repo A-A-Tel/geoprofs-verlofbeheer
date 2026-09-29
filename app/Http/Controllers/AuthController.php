@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\Response as Codes;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    public function login(LoginRequest $request): Response
+    public function login(LoginRequest $request): RedirectResponse
     {
+        Log::emergency('test');
         $data = $request->validated();
         $success = auth()->attempt($data);
 
         if ($success) {
-            return response(null, Codes::HTTP_NO_CONTENT);
+            return redirect()->route('dashboard');
         }
 
-        return response(null, Codes::HTTP_UNAUTHORIZED);
+        return redirect()->route('login');
     }
 }
