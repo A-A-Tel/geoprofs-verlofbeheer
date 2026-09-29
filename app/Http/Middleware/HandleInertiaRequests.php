@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
         $user = auth()->user();
         $auth = $user == null ? null : [
             'user' => $user->data,
+            'role' => $user->role,
             'settings' => $user->setting,
         ];
 
