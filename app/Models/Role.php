@@ -27,6 +27,21 @@ class Role extends Model
         return $this->belongsTo(Role::class);
     }
 
+    public function withParents(): array
+    {
+        $role = $this->toArray();
+        $nextParent = &$role;
+        $parent = $this->parent;
+
+        while ($parent != null) {
+            $nextParent['parent'] = $parent;
+            $nextParent = &$nextParent['parent'];
+            $parent = $parent->parent;
+        }
+
+        return $role;
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

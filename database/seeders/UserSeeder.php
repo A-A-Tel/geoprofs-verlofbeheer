@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'password' => 'Hallo12345%',
         ]);
 
-        $user->role()->associate(Role::findOrFail(RoleLevel::Employee));
+        $user->role()->associate(Role::findOrFail(RoleLevel::DepartmentManager));
         $user->department()->associate(Department::where('name', 'Geodesy')->firstOrFail());
         $user->save();
 
