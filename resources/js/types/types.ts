@@ -5,3 +5,18 @@ export enum RoleLevel {
     OfficeManager = 4,
     Administrator = 5,
 }
+
+export type UserData = {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+};
+
+export type UserSettings = {
+    notificationSound: boolean;
+};
+
+export type Role = {
+    id: RoleLevel;
+    name: string;
+};

@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 class User extends Authenticatable
 {
     use HasFactory;
+    use LogsActivity;
 
     protected $hidden = [
         'id',
@@ -55,5 +58,14 @@ class User extends Authenticatable
     public function supervisor(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->logExcept(['id', 'created_at', 'updated_at'])
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserSetting extends Model
 {
     protected $hidden = [
+        'id',
+        'two_factor_enabled',
         'user_id',
         'created_at',
         'updated_at',
@@ -16,6 +18,13 @@ class UserSetting extends Model
     protected $fillable = [
         'notification_sound',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'notification_sound' => 'boolean',
+        ];
+    }
 
     public function user(): BelongsTo
     {

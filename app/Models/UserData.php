@@ -18,7 +18,12 @@ class UserData extends Model
     ];
 
     protected $hidden = [
+        'id',
+        'user_id',
         'citizen_service_number',
+        'started_service_on',
+        'annual_leave_days',
+        'remaining_leave',
         'created_at',
         'updated_at',
     ];

@@ -6,7 +6,7 @@ export function LoginModal() {
             <Form
                 className={'bg-primary-light text-text-primary border-text-secondary m-auto grid gap-12 rounded-3xl border-3 p-8 md:w-1/3'}
                 method="POST"
-                action="/login"
+                action={route('login')}
             >
                 <div className={'grid flex-col gap-2'}>
                     <div className={'text-3xl font-bold'}>Welkom</div>

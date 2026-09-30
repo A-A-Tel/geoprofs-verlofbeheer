@@ -1,4 +1,5 @@
-import { Form, usePage } from '@inertiajs/react';
+import { useTypedPage } from '@/hooks/typedPage';
+import { Form } from '@inertiajs/react';
 import SvgIcon from '@mui/material/SvgIcon';
 
 export type SidebarEntryProps = {
@@ -8,13 +9,13 @@ export type SidebarEntryProps = {
 };
 
 export function SidebarEntry({ method = 'get', action, icon: Icon }: SidebarEntryProps) {
-    const { url } = usePage();
+    const { url } = useTypedPage();
 
     const isActive = url === action;
     return (
         <Form action={action} method={method} className="">
             <button
-                className={`flex h-[3rem] cursor-pointer items-center gap-2 rounded-xl p-2 font-bold transition-colors ${
+                className={`flex h-12 cursor-pointer items-center gap-2 rounded-xl p-2 font-bold transition-colors ${
                     isActive
                         ? 'bg-primary text-accent' // Classes als de URL actief is
                         : 'text-text-primary hover:bg-primary hover:text-accent' // Standaard / Hover classes
