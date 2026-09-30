@@ -21,4 +21,4 @@ export type Role = {
     name: string;
 };
 
-export type Succeeded = 'yes'|'no';
+export type Succeeded = 'yes' | 'no';
