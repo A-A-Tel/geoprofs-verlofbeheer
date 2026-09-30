@@ -20,3 +20,5 @@ export type Role = {
     id: RoleLevel;
     name: string;
 };
+
+export type Succeeded = 'yes'|'no';
