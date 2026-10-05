@@ -18,7 +18,7 @@ php artisan migrate:fresh --seed
 
 Je kan het project uitvoeren met:
 ```shell
-node ./node_modules/concurrently/dist/bin/index.js "php artisan serve" "npm run dev"
+composer run dev
 ```
 
 ## Format

@@ -1,6 +1,7 @@
 import { useTypedPage } from '@/hooks/typedPage';
 import { Succeeded } from '@/types';
 import { Sidebar } from '@/components/sidebar';
+import { LeaveModal} from '@/components/leave-modal';
 
 type LeaveProps = {
     types: string[];
@@ -18,6 +19,7 @@ export default function Leave({ types }: LeaveProps) {
     return (
         <>
             <Sidebar />
+            <LeaveModal />
         </>
     );
 }
