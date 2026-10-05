@@ -11,6 +11,8 @@ class LeaveOrderController extends Controller
 
     public function store()
     {
+
+
         return redirect()->route('leave', ['status' => 'success']);
     }
 }

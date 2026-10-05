@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\RoleLevel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -67,5 +68,18 @@ class User extends Authenticatable
             ->logExcept(['id', 'created_at', 'updated_at'])
             ->logOnlyDirty()
             ->dontLogEmptyChanges();
+    }
+
+    public function hasRoleLevel(RoleLevel $roleLevel): bool
+    {
+        $role = $this;
+        do  {
+            if ($role->id === $roleLevel) {
+                return true;
+            }
+            $role = $role->parent;
+        } while ($role != null);
+
+        return false;
     }
 }
