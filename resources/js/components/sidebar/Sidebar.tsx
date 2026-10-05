@@ -1,5 +1,6 @@
 import getEntriesForRole from '@/components/sidebar/roleEntries';
 import LogoutIcon from '@mui/icons-material/Logout';
+import EditIcon from '@mui/icons-material/Edit';
 import { SidebarEntry } from './SidebarEntry';
 
 export function Sidebar() {
@@ -18,7 +19,8 @@ export function Sidebar() {
                 <h1 className={'hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
                 <div className={'bg-divider w-hidden h-1 md:block'} />
                 {entries}
-                <SidebarEntry action={route('logout')} method="post" icon={LogoutIcon} />
+                <SidebarEntry action={route('leave')} method="post" icon={EditIcon} label={'Verlofaanvraag maken'}/>
+                <SidebarEntry action={route('logout')} method="post" icon={LogoutIcon} label={'Uitloggen'} />
             </div>
         </div>
     );

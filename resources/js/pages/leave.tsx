@@ -1,11 +1,12 @@
 import { useTypedPage } from '@/hooks/typedPage';
 import { Succeeded } from '@/types';
+import { Sidebar } from '@/components/sidebar';
 
 type LeaveProps = {
     types: string[];
 };
 
-export function Leave({ types }: LeaveProps) {
+export default function Leave({ types }: LeaveProps) {
     const { url } = useTypedPage();
 
     const params = new URLSearchParams(url);
@@ -14,5 +15,9 @@ export function Leave({ types }: LeaveProps) {
     console.log(succeeded);
     console.log(types);
 
-    return <></>;
+    return (
+        <>
+            <Sidebar />
+        </>
+    );
 }
