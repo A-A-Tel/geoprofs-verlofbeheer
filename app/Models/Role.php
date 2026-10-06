@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
 use Spatie\Activitylog\Support\LogOptions;
 
@@ -21,6 +22,11 @@ class Role extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'role_id');
+    }
 
     public function parent(): BelongsTo
     {

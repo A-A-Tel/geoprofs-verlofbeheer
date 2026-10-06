@@ -22,6 +22,7 @@ class User extends Authenticatable
         'two_factor_secret',
         'created_at',
         'updated_at',
+        'deleted_at'
     ];
 
     protected $fillable = [

@@ -28,7 +28,10 @@ class LeaveOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => 'required',
+            'type' => 'required|exists:leave_types,id',
+            'reason' => 'required|string|min:1|max:1024',
+            'start_on' => 'required|date_format:Y-m-d\TH:i:s.v\Z',
+            'end_on' => 'nullable|date_format:Y-m-d\TH:i:s.v\Z',
         ];
     }
 }
