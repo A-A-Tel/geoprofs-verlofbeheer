@@ -17,7 +17,7 @@ Route::get('/leave-overview', function () {
 });
 
 Route::get('/leave-overview/{id}', function (int $id) {
-    return Inertia::render('leave-overview', [] );
+    return Inertia::render('leave-item', [] );
 });
 
 Route::controller(AuthController::class)->group(function () {
