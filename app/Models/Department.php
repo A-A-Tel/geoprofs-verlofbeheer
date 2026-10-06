@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\RoleLevel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,6 +27,11 @@ class Department extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class, 'department_id');
+    }
+
+    public function manager(): User
+    {
+        return User::where(['role_id' => RoleLevel::DepartmentManager, 'department_id' => $this->id])->firstOrFail();
     }
 
     public function getActivitylogOptions(): LogOptions
