@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
+use Spatie\Activitylog\Support\LogOptions;
 
 class LeaveType extends Model
 {
@@ -21,5 +22,14 @@ class LeaveType extends Model
     public function leaves(): HasMany
     {
         return $this->hasMany(Leave::class, 'type_id');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->logExcept(['id', 'created_at', 'updated_at'])
+            ->logOnlyDirty()
+            ->dontLogEmptyChanges();
     }
 }
