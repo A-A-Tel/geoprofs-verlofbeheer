@@ -29,7 +29,7 @@ class Department extends Model
         return $this->hasMany(User::class, 'department_id');
     }
 
-    public function manager(): User
+    public function getManager(): User
     {
         return User::where(['role_id' => RoleLevel::DepartmentManager, 'department_id' => $this->id])->firstOrFail();
     }

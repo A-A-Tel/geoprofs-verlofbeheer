@@ -51,6 +51,13 @@ class Leave extends Model
         return $this->belongsTo(LeaveType::class);
     }
 
+    public function getAmountOfDays(): int
+    {
+        if ($this->end_on == null) return 1;
+
+        return (int) $this->start_on->diffInDays($this->end_on);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
