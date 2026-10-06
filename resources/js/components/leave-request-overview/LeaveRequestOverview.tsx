@@ -12,7 +12,7 @@ export function LeaveRequestOverview({leaves}: LeaveRequestOverviewProps) {
 
     console.log(leaves);
     const entries = leaves.map(leave => {
-        return <LeaveOverviewEntry key={leave.id} type={leave.type} action={'#'} requester={leave.requester} />
+        return <LeaveOverviewEntry key={leave.id} type={leave.type} action={'/leave-overview/' + leave.id} requester={leave.requester} />
     });
 
     return (

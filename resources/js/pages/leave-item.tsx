@@ -15,9 +15,9 @@ export default function LeaveOverview({leaves}: LeaveOverviewProps) {
     const tempLeaves = [
         {
             id: 1,
-            type: 'Ziek',
+            type: 'Bijzonder',
             requester: 'Harry',
-            reason: 'heb ligma gekregen'
+            reason: 'Ik ben van de trap gevallen dus ik kan helaas niet komen'
         }
     ];
 
