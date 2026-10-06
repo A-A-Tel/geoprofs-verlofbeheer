@@ -28,7 +28,7 @@ class LeaveOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'type' => 'required',
         ];
     }
 }
