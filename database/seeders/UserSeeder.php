@@ -44,19 +44,17 @@ class UserSeeder extends Seeder
         $employee->supervisor()->associate($manager);
         $employee->save();
 
-
-        $employeeSetting = new UserSetting();
+        $employeeSetting = new UserSetting;
         $employeeSetting->user()->associate($employee);
         $employeeSetting->save();
 
-        $managerSetting = new UserSetting();
+        $managerSetting = new UserSetting;
         $managerSetting->user()->associate($manager);
         $managerSetting->save();
 
-        $departmentManagerSetting = new UserSetting();
+        $departmentManagerSetting = new UserSetting;
         $departmentManagerSetting->user()->associate($departmentManager);
         $departmentManagerSetting->save();
-
 
         $employeeData = new UserData([
             'first_name' => 'Regu',

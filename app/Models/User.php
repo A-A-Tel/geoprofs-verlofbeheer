@@ -23,7 +23,7 @@ class User extends Authenticatable
         'two_factor_secret',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -80,7 +80,7 @@ class User extends Authenticatable
     public function hasRoleLevel(RoleLevel $roleLevel): bool
     {
         $role = $this;
-        do  {
+        do {
             if ($role->id === $roleLevel) {
                 return true;
             }

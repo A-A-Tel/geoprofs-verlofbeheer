@@ -14,8 +14,9 @@ class LeaveOrderRequest extends FormRequest
     public function authorize(): bool
     {
         $user = auth()->user();
-        if ($user == null) return false;
-
+        if ($user == null) {
+            return false;
+        }
 
         return $user->hasRoleLevel(RoleLevel::Employee);
     }

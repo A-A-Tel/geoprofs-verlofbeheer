@@ -12,11 +12,11 @@ class LeaveType extends Model
     use LogsActivity;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at', 'deleted_at'
+        'created_at', 'updated_at', 'deleted_at',
     ];
 
     public function leaves(): HasMany

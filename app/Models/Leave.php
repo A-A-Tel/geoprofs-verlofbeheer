@@ -53,7 +53,9 @@ class Leave extends Model
 
     public function getAmountOfDays(): int
     {
-        if ($this->end_on == null) return 1;
+        if ($this->end_on == null) {
+            return 1;
+        }
 
         return (int) $this->start_on->diffInDays($this->end_on);
     }

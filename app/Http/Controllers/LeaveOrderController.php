@@ -13,7 +13,9 @@ class LeaveOrderController extends Controller
     {
         $user = auth()->user();
 
-        if ($user == null || !$user->hasRoleLevel(RoleLevel::Employee)) redirect()->back();
+        if ($user == null || ! $user->hasRoleLevel(RoleLevel::Employee)) {
+            redirect()->back();
+        }
 
         return inertia('leave', ['types' => LeaveType::all(), 'remaining_leave_days' => $user->getRemainingLeaveDays()]);
     }
@@ -35,7 +37,6 @@ class LeaveOrderController extends Controller
         $leave->type()->associate($data['type']);
 
         $leave->save();
-
 
         return redirect()->route('leave', ['status' => 'success']);
     }
