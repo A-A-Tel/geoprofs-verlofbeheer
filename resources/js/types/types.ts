@@ -27,7 +27,7 @@ export type Leave = {
     type: {
         id: number;
         name: string;
-    }
+    };
     requester: UserData;
     reason: string;
-}
+};

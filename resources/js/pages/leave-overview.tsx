@@ -28,11 +28,7 @@ export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
 
     return (
         <>
-            <Sidebar children={
-                [
-                    <LeaveList leaves={tempLeaves} />
-                ]
-            } />
+            <Sidebar children={[<LeaveList leaves={tempLeaves} />]} />
         </>
     );
 }

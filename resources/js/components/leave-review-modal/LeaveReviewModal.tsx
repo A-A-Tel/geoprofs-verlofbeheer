@@ -6,13 +6,12 @@ export type LeaveRequestOverviewProps = {
 };
 
 export function LeaveReviewModal({ leave }: LeaveRequestOverviewProps) {
-
     return (
         <Form
-        className={'bg-primary-light text-text-primary border-text-secondary m-auto grid gap-12 rounded-3xl border-3 p-8 md:w-1/2'}
-        method="POST"
-        action={'#'}
-    >
+            className={'bg-primary-light text-text-primary border-text-secondary m-auto grid gap-12 rounded-3xl border-3 p-8 md:w-1/2'}
+            method="POST"
+            action={'#'}
+        >
             <div className={'flex flex-col gap-8'}>
                 <Link href={`/leave-overview`}>
                     <button

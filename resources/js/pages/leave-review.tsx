@@ -7,14 +7,9 @@ type LeaveOverviewProps = {
 };
 
 export default function LeaveOverview({ leave }: LeaveOverviewProps) {
-
     return (
         <>
-            <Sidebar children={
-                [
-                    <LeaveReviewModal leave={leave} />
-                ]
-            } />
+            <Sidebar children={[<LeaveReviewModal leave={leave} />]} />
         </>
     );
 }
