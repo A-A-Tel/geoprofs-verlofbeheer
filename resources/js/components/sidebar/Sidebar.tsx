@@ -18,7 +18,7 @@ export function Sidebar( { children }: SidebarProps ) {
     }
 
     return (
-        <div className='flex'>
+        <div className='md:flex w-full flex-col'>
             <div className={'bg-primary-light grid p-3 sm:w-full md:h-screen md:w-1/7'}>
                 <div className={'flex gap-2 md:flex-col'}>
                     <h1 className={'hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
