@@ -14,5 +14,5 @@ export function LeaveList({ leaves }: LeaveRequestOverviewProps) {
         return <LeaveListEntry key={leave.id} type={leave.type} action={'#'} requester={leave.requester} />;
     });
 
-    return <div className={`flex items-center gap-3`}>{entries}</div>;
+    return <div className={`flex flex-wrap items-center gap-3`}>{entries}</div>;
 }
