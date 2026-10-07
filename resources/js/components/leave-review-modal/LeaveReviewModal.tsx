@@ -1,19 +1,18 @@
+import { Leave } from '@/types';
 import { Form, Link } from '@inertiajs/react';
 
-export type LeaveOverviewEntryProps = {
-    type: string;
-    action: string;
-    requester: string;
-    reason: string;
+export type LeaveRequestOverviewProps = {
+    leave: Leave;
 };
 
-export function LeaveItemEntry({ type, action, requester, reason }: LeaveOverviewEntryProps) {
+export function LeaveReviewModal({ leave }: LeaveRequestOverviewProps) {
+
     return (
         <Form
-            className={'bg-primary-light text-text-primary border-text-secondary m-auto grid gap-12 rounded-3xl border-3 p-8 md:w-1/2'}
-            method="POST"
-            action={action}
-        >
+        className={'bg-primary-light text-text-primary border-text-secondary m-auto grid gap-12 rounded-3xl border-3 p-8 md:w-1/2'}
+        method="POST"
+        action={'#'}
+    >
             <div className={'flex flex-col gap-8'}>
                 <Link href={`/leave-overview`}>
                     <button
@@ -28,7 +27,7 @@ export function LeaveItemEntry({ type, action, requester, reason }: LeaveOvervie
                     <input
                         name="type"
                         disabled={true}
-                        placeholder={requester}
+                        placeholder={leave.requester.firstName + ' ' + leave.requester.lastName}
                         type={'text'}
                         className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
                     />
@@ -38,7 +37,7 @@ export function LeaveItemEntry({ type, action, requester, reason }: LeaveOvervie
                     <input
                         name="type"
                         disabled={true}
-                        placeholder={type}
+                        placeholder={leave.type.name}
                         type={'text'}
                         className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
                     />
@@ -48,7 +47,7 @@ export function LeaveItemEntry({ type, action, requester, reason }: LeaveOvervie
                     <textarea
                         name="reason"
                         disabled={true}
-                        placeholder={reason}
+                        placeholder={leave.reason}
                         className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
                     />
                 </div>

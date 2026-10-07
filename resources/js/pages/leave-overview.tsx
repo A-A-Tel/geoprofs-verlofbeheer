@@ -1,12 +1,9 @@
-import { LeaveRequestOverview } from '@/components/leave-request-overview';
+import { LeaveList } from '@/components/leave-list';
 import { Sidebar } from '@/components/sidebar';
+import { Leave } from '@/types';
 
 type LeaveOverviewProps = {
-    leaves: {
-        id: number;
-        type: string;
-        requester: string;
-    }[];
+    leaves: Leave[];
 };
 
 export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
@@ -31,8 +28,11 @@ export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
 
     return (
         <>
-            <Sidebar />
-            <LeaveRequestOverview leaves={tempLeaves} />
+            <Sidebar children={
+                [
+                    <LeaveList leaves={tempLeaves} />
+                ]
+            } />
         </>
     );
 }

@@ -1,8 +1,13 @@
 import getEntriesForRole from '@/components/sidebar/roleEntries';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { SidebarEntry } from './SidebarEntry';
+import { ReactNode } from 'react';
 
-export function Sidebar() {
+export type SidebarProps = {
+    children: ReactNode;
+}
+
+export function Sidebar( { children }: SidebarProps ) {
     const entryProps = getEntriesForRole(null!);
     const entries = [];
 
@@ -13,12 +18,17 @@ export function Sidebar() {
     }
 
     return (
-        <div className={'bg-primary-light grid p-3 sm:w-full md:h-screen md:w-1/7'}>
-            <div className={'flex gap-2 md:flex-col'}>
-                <h1 className={'hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
-                <div className={'bg-divider w-hidden h-1 md:block'} />
-                {entries}
-                <SidebarEntry action={route('logout')} method="post" icon={LogoutIcon} />
+        <div className='flex'>
+            <div className={'bg-primary-light grid p-3 sm:w-full md:h-screen md:w-1/7'}>
+                <div className={'flex gap-2 md:flex-col'}>
+                    <h1 className={'hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
+                    <div className={'bg-divider w-hidden h-1 md:block'} />
+                    {entries}
+                    <SidebarEntry action={route('logout')} method="post" icon={LogoutIcon} />
+                </div>
+            </div>
+            <div>
+                {children}
             </div>
         </div>
     );

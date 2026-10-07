@@ -7,6 +7,7 @@ export enum RoleLevel {
 }
 
 export type UserData = {
+    userId: number;
     firstName: string;
     lastName: string;
     phoneNumber: string;
@@ -20,3 +21,13 @@ export type Role = {
     id: RoleLevel;
     name: string;
 };
+
+export type Leave = {
+    id: number;
+    type: {
+        id: number;
+        name: string;
+    }
+    requester: UserData;
+    reason: string;
+}

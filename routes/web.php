@@ -16,8 +16,8 @@ Route::get('/leave-overview', function () {
     return Inertia::render('leave-overview', []);
 });
 
-Route::get('/leave-overview/{id}', function (int $id) {
-    return Inertia::render('leave-item', []);
+Route::get('/leave/{id}', function (int $id) {
+    return Inertia::render('leave-review', []);
 });
 
 Route::controller(AuthController::class)->group(function () {

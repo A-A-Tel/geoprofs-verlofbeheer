@@ -7,7 +7,7 @@ export type LeaveOverviewEntryProps = {
     requester: string;
 };
 
-export function LeaveOverviewEntry({ type, action, requester }: LeaveOverviewEntryProps) {
+export function LeaveListEntry({ type, action, requester }: LeaveOverviewEntryProps) {
     return (
         <Link href={action}>
             <div className={'text-text-primary flex font-bold'}>
