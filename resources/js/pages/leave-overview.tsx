@@ -6,11 +6,10 @@ type LeaveOverviewProps = {
         id: number;
         type: string;
         requester: string;
-    }[]
-}
+    }[];
+};
 
-export default function LeaveOverview({leaves}: LeaveOverviewProps) {
-
+export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
     const tempLeaves = [
         {
             id: 1,

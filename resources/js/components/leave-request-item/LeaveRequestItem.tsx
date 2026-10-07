@@ -9,16 +9,11 @@ export type LeaveRequestOverviewProps = {
     }[];
 };
 
-export function LeaveRequestItem({leaves}: LeaveRequestOverviewProps) {
-
+export function LeaveRequestItem({ leaves }: LeaveRequestOverviewProps) {
     console.log(leaves);
-    const entries = leaves.map(leave => {
-        return <LeaveItemEntry key={leave.id} type={leave.type} action={'#'} requester={leave.requester} reason={leave.reason}/>
+    const entries = leaves.map((leave) => {
+        return <LeaveItemEntry key={leave.id} type={leave.type} action={'#'} requester={leave.requester} reason={leave.reason} />;
     });
 
-    return (
-        <div className={`flex gap-3 items-center`}>
-            {entries}
-        </div>
-    );
+    return <div className={`flex items-center gap-3`}>{entries}</div>;
 }

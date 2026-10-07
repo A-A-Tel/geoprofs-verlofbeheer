@@ -10,15 +10,14 @@ type LeaveOverviewProps = {
     }[];
 };
 
-export default function LeaveOverview({leaves}: LeaveOverviewProps) {
-
+export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
     const tempLeaves = [
         {
             id: 1,
             type: 'Bijzonder',
             requester: 'Harry',
-            reason: 'Ik ben van de trap gevallen dus ik kan helaas niet komen'
-        }
+            reason: 'Ik ben van de trap gevallen dus ik kan helaas niet komen',
+        },
     ];
 
     return (

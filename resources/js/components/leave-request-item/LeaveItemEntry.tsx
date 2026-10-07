@@ -5,7 +5,7 @@ export type LeaveOverviewEntryProps = {
     action: string;
     requester: string;
     reason: string;
-}
+};
 
 export function LeaveItemEntry({ type, action, requester, reason }: LeaveOverviewEntryProps) {
     return (
