@@ -27,6 +27,7 @@ export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
             requester: 'Harry',
         },
     ];
+    console.log(leaves);
 
     return (
         <>

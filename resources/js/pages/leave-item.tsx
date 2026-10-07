@@ -11,6 +11,7 @@ type LeaveOverviewProps = {
 };
 
 export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
+    console.log(leaves)
     const tempLeaves = [
         {
             id: 1,
