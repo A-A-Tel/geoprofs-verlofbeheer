@@ -45,11 +45,10 @@ export function LeaveItemEntry({ type, action, requester, reason }: LeaveOvervie
                 </div>
                 <div className={'flex flex-col gap-2'}>
                     <div>Verlofreden *</div>
-                    <input
+                    <textarea
                         name="reason"
                         disabled={true}
                         placeholder={reason}
-                        type={'text'}
                         className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
                     />
                 </div>
