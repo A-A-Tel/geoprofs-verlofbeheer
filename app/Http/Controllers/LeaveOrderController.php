@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LeaveOrderRequest;
 use App\Models\Leave;
+use App\Models\LeaveType;
 use App\RoleLevel;
 
 class LeaveOrderController extends Controller
@@ -14,7 +15,7 @@ class LeaveOrderController extends Controller
 
         if ($user == null || !$user->hasRoleLevel(RoleLevel::Employee)) redirect()->back();
 
-        return inertia('leave', ['types' => ['TYPE1', 'TYPE2', 'TYPE3', 'TYPE4'], 'remaining_leave_days' => $user->getRemainingLeaveDays()]);
+        return inertia('leave', ['types' => LeaveType::all(), 'remaining_leave_days' => $user->getRemainingLeaveDays()]);
     }
 
     public function store(LeaveOrderRequest $request)
@@ -24,7 +25,7 @@ class LeaveOrderController extends Controller
 
         $leave = Leave::create($data);
 
-        if ($leave->getAmountOfDays() > $user->getRemainingLeaveDays()) {
+        if ($leave->type->name === 'Verlof' && $leave->getAmountOfDays() > $user->getRemainingLeaveDays()) {
             return redirect()->route('leave', ['status' => 'failed']);
         }
 
