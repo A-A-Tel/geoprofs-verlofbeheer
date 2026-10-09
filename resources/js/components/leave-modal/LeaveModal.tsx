@@ -12,7 +12,7 @@ export function LeaveModal() {
                 <select
                     name="leave"
                     id="Leave"
-                    className="bg-background border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold"
+                    className="bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold"
                 >
                     <option value="ziekdag">Ziekdag</option>
                     <option value="persoonlijk">persoonlijk</option>
