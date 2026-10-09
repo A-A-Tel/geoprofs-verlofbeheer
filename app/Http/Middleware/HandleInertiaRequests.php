@@ -36,9 +36,10 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $user = auth()->user();
+
         $auth = $user == null ? null : [
             'user' => $user->data,
-            'role' => $user->role,
+            'role' => $user->role->withParents(),
             'settings' => $user->setting,
         ];
 
