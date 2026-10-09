@@ -1,6 +1,6 @@
 import { Form } from '@inertiajs/react';
 
-export function LeaveModal(){
+export function LeaveModal() {
     return (
         <div className={`grid h-screen w-full items-center`}>
             <Form
@@ -22,12 +22,13 @@ export function LeaveModal(){
                 <textarea
                     name="verlofreden"
                     placeholder={'verlofreden'}
-                    className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2 h-30'}
+                    className={'bg-primary-dark border-text-secondary h-30 rounded-md border-2 p-2'}
                 />
                 <button
                     type={'submit'}
                     className={
-                        'bg-background border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold'                    }
+                        'bg-background border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold'
+                    }
                 >
                     versturen
                 </button>

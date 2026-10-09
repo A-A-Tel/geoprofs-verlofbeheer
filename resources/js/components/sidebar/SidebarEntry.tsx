@@ -16,7 +16,7 @@ export function SidebarEntry({ method = 'get', action, icon: Icon, label }: Side
     return (
         <Form action={action} method={method} className="">
             <button
-                className={`flex h-12 cursor-pointer items-center gap-2 rounded-xl p-2 font-bold transition-colors whitespace-nowrap ${
+                className={`flex h-12 cursor-pointer items-center gap-2 rounded-xl p-2 font-bold whitespace-nowrap transition-colors ${
                     isActive
                         ? 'bg-primary text-accent' // Classes als de URL actief is
                         : 'text-text-primary hover:bg-primary hover:text-accent' // Standaard / Hover classes
