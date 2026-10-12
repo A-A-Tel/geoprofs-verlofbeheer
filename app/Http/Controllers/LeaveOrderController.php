@@ -17,7 +17,7 @@ class LeaveOrderController extends Controller
             redirect()->back();
         }
 
-        return inertia('leave', ['types' => LeaveType::all(), 'remaining_leave_days' => $user->getRemainingLeaveDays()]);
+        return inertia('leave', ['types' => LeaveType::all(), 'available_days' => $user->getRemainingLeaveDays()]);
     }
 
     public function store(LeaveOrderRequest $request)

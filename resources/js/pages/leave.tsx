@@ -1,25 +1,24 @@
 import { LeaveModal } from '@/components/leave-modal';
 import { Sidebar } from '@/components/sidebar';
 import { useTypedPage } from '@/hooks/typedPage';
-import { Succeeded } from '@/types';
+import { LeaveType, Succeeded } from '@/types';
 
 type LeaveProps = {
-    types: string[];
+    types: LeaveType[];
+    availableDays: number;
 };
 
-export default function Leave({ types }: LeaveProps) {
+export default function Leave({ types, availableDays }: LeaveProps) {
     const { url } = useTypedPage();
 
     const params = new URLSearchParams(url);
     const succeeded = params.get('succeeded') as Succeeded | null;
 
-    console.log(succeeded);
-    console.log(types);
-
     return (
         <>
-            <Sidebar />
-            <LeaveModal />
+            <Sidebar children={[
+                <LeaveModal types={types} availableDays={availableDays} />
+            ]} />
         </>
     );
 }

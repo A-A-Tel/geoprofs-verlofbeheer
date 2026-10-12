@@ -1,6 +1,12 @@
 import { Form } from '@inertiajs/react';
+import { LeaveType } from '@/types';
 
-export function LeaveModal() {
+export type LeaveModalProps = {
+    types: LeaveType[];
+    availableDays: number;
+}
+
+export function LeaveModal({types, availableDays}: LeaveModalProps) {
     return (
         <div className={`grid h-screen w-full items-center`}>
             <Form
@@ -14,10 +20,7 @@ export function LeaveModal() {
                     id="Leave"
                     className="bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold"
                 >
-                    <option value="ziekdag">Ziekdag</option>
-                    <option value="persoonlijk">persoonlijk</option>
-                    <option value="verlof">verlof</option>
-                    <option value="bijzonder">bijzonder verlof</option>
+                    {types.map((type) => <option className='text-text-primary' key={type.id} value={type.id}>{type.name}</option>)}
                 </select>
                 <textarea
                     name="verlofreden"

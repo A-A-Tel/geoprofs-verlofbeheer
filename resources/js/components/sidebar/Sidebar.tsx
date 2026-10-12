@@ -28,7 +28,8 @@ export function Sidebar({ children }: SidebarProps) {
                     <SidebarEntry action={route('leave')} icon={EditIcon} label={'Verlofaanvraag maken'} />
                     <SidebarEntry action={route('logout')} method="post" icon={LogoutIcon} label={'Uitloggen'} />
                 </div>
-            <div className={'m-5'}>{children}</div>
+            </div>
+            <main className={'m-5 w-full'}>{children}</main>
         </div>
     );
 }
