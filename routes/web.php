@@ -13,6 +13,14 @@ Route::get('/login', function () {
     return Inertia::render('login', []);
 });
 
+Route::get('/leave-overview', function () {
+    return Inertia::render('leave-overview', []);
+});
+
+Route::get('/leave/{id}', function (int $id) {
+    return Inertia::render('leave-review', []);
+});
+
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout');
