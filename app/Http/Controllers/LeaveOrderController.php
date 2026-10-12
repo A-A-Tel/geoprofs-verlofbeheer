@@ -6,6 +6,7 @@ use App\Http\Requests\LeaveOrderRequest;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use App\RoleLevel;
+use Illuminate\Support\Facades\Log;
 
 class LeaveOrderController extends Controller
 {
@@ -14,9 +15,8 @@ class LeaveOrderController extends Controller
         $user = auth()->user();
 
         if ($user == null || ! $user->hasRoleLevel(RoleLevel::Employee)) {
-            redirect()->back();
+            return redirect()->back();
         }
-
         return inertia('leave', ['types' => LeaveType::all(), 'available_days' => $user->getRemainingLeaveDays()]);
     }
 
@@ -25,17 +25,18 @@ class LeaveOrderController extends Controller
         $data = $request->validated();
         $user = auth()->user();
 
-        $leave = Leave::create($data);
-
-        if ($leave->type->name === 'Verlof' && $leave->getAmountOfDays() > $user->getRemainingLeaveDays()) {
-            return redirect()->route('leave', ['status' => 'failed']);
-        }
+        $leave = new Leave($data);
 
         $leave->requester()->associate($user);
         $leave->supervisor()->associate($user->supervisor);
         $leave->manager()->associate($user->department->getManager());
         $leave->type()->associate($data['type']);
 
+        if ($leave->type->name === 'Verlof' && $leave->getAmountOfDays() > $user->getRemainingLeaveDays()) {
+            return redirect()->route('leave', ['status' => 'failed']);
+        }
+
+        Log::warning($leave->start_on);
         $leave->save();
 
         return redirect()->route('leave', ['status' => 'success']);

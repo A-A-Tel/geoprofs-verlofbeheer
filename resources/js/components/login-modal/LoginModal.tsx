@@ -15,6 +15,7 @@ export function LoginModal() {
                 <div className={'grid flex-col gap-2'}>
                     <div>Email</div>
                     <input
+                        required
                         name="email"
                         placeholder={'regu.larjoe@bedrijf.nl'}
                         type={'email'}
@@ -22,6 +23,7 @@ export function LoginModal() {
                     />
                     <div>Wachtwoord</div>
                     <input
+                        required
                         name="password"
                         placeholder={'*******'}
                         type={'password'}

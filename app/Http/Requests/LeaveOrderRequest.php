@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\RoleLevel;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class LeaveOrderRequest extends FormRequest
 {
@@ -17,7 +18,6 @@ class LeaveOrderRequest extends FormRequest
         if ($user == null) {
             return false;
         }
-
         return $user->hasRoleLevel(RoleLevel::Employee);
     }
 
@@ -31,8 +31,8 @@ class LeaveOrderRequest extends FormRequest
         return [
             'type' => 'required|exists:leave_types,id',
             'reason' => 'required|string|min:1|max:1024',
-            'start_on' => 'required|date_format:Y-m-d\TH:i:s.v\Z',
-            'end_on' => 'nullable|date_format:Y-m-d\TH:i:s.v\Z',
+            'start_on' => 'required|date',
+            'end_on' => 'nullable|date',
         ];
     }
 }
