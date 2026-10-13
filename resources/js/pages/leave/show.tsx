@@ -1,4 +1,4 @@
-import { LeaveReviewModal } from '@/components/leave-review-modal';
+import { LeaveReviewModal } from '@/components/leave/leave-review-modal';
 import { Sidebar } from '@/components/sidebar';
 import { Leave } from '@/types';
 

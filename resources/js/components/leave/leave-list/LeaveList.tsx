@@ -1,4 +1,4 @@
-import { LeaveListEntry } from '@/components/leave-list/LeaveListEntry';
+import { LeaveListEntry } from './LeaveListEntry';
 
 export type LeaveRequestOverviewProps = {
     leaves: {

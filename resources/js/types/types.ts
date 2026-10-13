@@ -34,4 +34,4 @@ export type Leave = {
     requester: UserData;
     reason: string;
 };
-export type Succeeded = 'yes' | 'no';
+export type Status = 'success' | 'failed';

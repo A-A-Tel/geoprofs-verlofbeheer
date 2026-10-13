@@ -6,7 +6,7 @@ export type LeaveModalProps = {
     availableDays: number;
 }
 
-export function LeaveModal({types, availableDays}: LeaveModalProps) {
+export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
     return (
         <div className={`grid h-full w-full items-center`}>
             <Form

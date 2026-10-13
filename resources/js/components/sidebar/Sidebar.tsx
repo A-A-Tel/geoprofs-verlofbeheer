@@ -17,9 +17,9 @@ export function Sidebar({ children }: SidebarProps) {
 
     return (
         <div className="flex w-full flex-col md:flex-row">
-            <div className={'bg-primary-light grid p-3 sm:w-full md:h-screen md:w-1/7 mb-15 md:m-0'}>
+            <div className={'bg-primary-light md:h-screen w-full md:w-fit mb-15 md:m-0'}>
                 <nav className={'flex gap-2 md:flex-col'}>
-                    <h1 className={'hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
+                    <h1 className={'m-5 hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
                     <div className={'bg-divider w-hidden h-1 md:block'} />
                     {entries}
                     <div className={'mt-0 ml-auto md:mt-auto md:ml-0'}>
@@ -27,7 +27,7 @@ export function Sidebar({ children }: SidebarProps) {
                     </div>
                 </nav>
             </div>
-            <main className={'w-full'}>{children}</main>
+            <main className={'w-full p-10'}>{children}</main>
         </div>
     );
 }

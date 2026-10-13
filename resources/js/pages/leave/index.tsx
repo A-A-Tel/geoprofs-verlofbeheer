@@ -1,4 +1,4 @@
-import { LeaveList } from '@/components/leave-list';
+import { LeaveList } from '@/components/leave/leave-list';
 import { Sidebar } from '@/components/sidebar';
 import { Leave } from '@/types';
 

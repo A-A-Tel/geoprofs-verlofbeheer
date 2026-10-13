@@ -1,7 +1,7 @@
-import { LeaveModal } from '@/components/leave-modal';
 import { Sidebar } from '@/components/sidebar';
 import { useTypedPage } from '@/hooks/typedPage';
-import { LeaveType, Succeeded } from '@/types';
+import { LeaveType, Status } from '@/types';
+import { LeaveCreateModal } from '@/components/leave/leave-create-modal';
 
 type LeaveProps = {
     types: LeaveType[];
@@ -12,12 +12,12 @@ export default function Create({ types, availableDays }: LeaveProps) {
     const { url } = useTypedPage();
 
     const params = new URLSearchParams(url);
-    const succeeded = params.get('succeeded') as Succeeded | null;
+    const succeeded = params.get('succeeded') as Status | null;
 
     return (
         <>
             <Sidebar children={[
-                <LeaveModal types={types} availableDays={availableDays} />
+                <LeaveCreateModal types={types} availableDays={availableDays} />
             ]} />
         </>
     );
