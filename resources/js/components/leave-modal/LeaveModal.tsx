@@ -35,7 +35,7 @@ export function LeaveModal({types, availableDays}: LeaveModalProps) {
                 <textarea
                     required
                     name="reason"
-                    placeholder={'verlofreden'}
+                    placeholder={'...'}
                     className={'text-xl bg-primary-dark border-text-secondary h-30 rounded-md border-2 p-2'}
                 />
                 <button

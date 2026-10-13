@@ -20,7 +20,7 @@ export function Sidebar({ children }: SidebarProps) {
 
     return (
         <div className="flex w-full flex-col md:flex-row">
-            <div className={'bg-primary-light grid p-3 sm:w-full md:h-screen md:w-1/7'}>
+            <div className={'bg-primary-light grid p-3 sm:w-full md:h-screen md:w-1/7 mb-15 md:m-0'}>
                 <div className={'flex gap-2 md:flex-col'}>
                     <h1 className={'hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
                     <div className={'bg-divider w-hidden h-1 md:block'} />
@@ -29,7 +29,7 @@ export function Sidebar({ children }: SidebarProps) {
                     <SidebarEntry action={route('logout')} method="post" icon={LogoutIcon} label={'Uitloggen'} />
                 </div>
             </div>
-            <main className={'m-5 w-full'}>{children}</main>
+            <main className={'w-full'}>{children}</main>
         </div>
     );
 }
