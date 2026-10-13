@@ -6,7 +6,7 @@ type LeaveOverviewProps = {
     leaves: Leave[];
 };
 
-export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
+export default function Index({ leaves }: LeaveOverviewProps) {
     const tempLeaves = [
         {
             id: 1,

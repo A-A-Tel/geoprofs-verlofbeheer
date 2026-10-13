@@ -8,7 +8,7 @@ type LeaveProps = {
     availableDays: number;
 };
 
-export default function Leave({ types, availableDays }: LeaveProps) {
+export default function Create({ types, availableDays }: LeaveProps) {
     const { url } = useTypedPage();
 
     const params = new URLSearchParams(url);

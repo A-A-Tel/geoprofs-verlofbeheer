@@ -12,7 +12,7 @@ class LeaveController extends Controller
 {
     public function index()
     {
-        return inertia('leave-overview');
+        return inertia('leave/index');
     }
 
     public function show(string $id)
@@ -27,7 +27,7 @@ class LeaveController extends Controller
         if ($user == null || ! $user->hasRoleLevel(RoleLevel::Employee)) {
             return redirect()->back();
         }
-        return inertia('leave', ['types' => LeaveType::all(), 'available_days' => $user->getRemainingLeaveDays()]);
+        return inertia('leave/create', ['types' => LeaveType::all(), 'available_days' => $user->getRemainingLeaveDays()]);
     }
 
     public function store(LeaveCreateRequest $request)
