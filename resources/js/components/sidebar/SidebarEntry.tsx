@@ -1,30 +1,28 @@
 import { useTypedPage } from '@/hooks/typedPage';
-import { Form } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import SvgIcon from '@mui/material/SvgIcon';
 
 export type SidebarEntryProps = {
     method?: 'get' | 'post';
-    action: string;
+    href: string;
     icon: typeof SvgIcon;
     label: string;
 };
 
-export function SidebarEntry({ method = 'get', action, icon: Icon, label }: SidebarEntryProps) {
+export function SidebarEntry({ method = 'get', href, icon: Icon, label }: SidebarEntryProps) {
     const { url } = useTypedPage();
 
-    const isActive = url === action;
+    const isActive = url === href;
     return (
-        <Form action={action} method={method} className="">
-            <button
-                className={`flex h-12 cursor-pointer items-center gap-2 rounded-xl p-2 font-bold whitespace-nowrap transition-colors ${
+        <Link href={href} method={method}
+              className={`flex h-12 cursor-pointer items-center gap-2 rounded-xl p-2 font-bold whitespace-nowrap transition-colors ${
                     isActive
-                        ? 'bg-primary text-accent' // Classes als de URL actief is
-                        : 'text-text-primary hover:bg-primary hover:text-accent' // Standaard / Hover classes
-                } `}
-            >
-                <Icon fontSize="large" />
-                <div className={'hidden font-bold md:block'}>{label}</div>
-            </button>
-        </Form>
+                        ? 'bg-primary text-accent'
+                        : 'text-text-primary hover:bg-primary hover:text-accent'
+                    }
+              `}>
+            <Icon fontSize="large" />
+            <div className={'hidden font-bold md:block'}>{label}</div>
+        </Link>
     );
 }

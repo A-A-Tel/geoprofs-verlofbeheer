@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Log;
 
-class LeaveOrderRequest extends FormRequest
+class LeaveCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
