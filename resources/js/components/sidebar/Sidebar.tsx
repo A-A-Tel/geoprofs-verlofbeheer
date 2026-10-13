@@ -1,15 +1,18 @@
 import getFilteredEntries from '@/components/sidebar/roleEntries';
 import { ReactNode } from 'react';
 import { SidebarEntry } from './SidebarEntry';
-import EditIcon from '@mui/icons-material/Edit';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useTypedPage } from '@/hooks/typedPage';
 
 export type SidebarProps = {
     children: ReactNode;
 };
 
 export function Sidebar({ children }: SidebarProps) {
-    const entryProps = getFilteredEntries(null!);
+
+    const { props } = useTypedPage();
+
+    const entryProps = getFilteredEntries(props.auth?.role?? null);
     const entries = entryProps.map((props) => (<SidebarEntry {...props} />))
 
     return (
@@ -19,7 +22,6 @@ export function Sidebar({ children }: SidebarProps) {
                     <h1 className={'hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
                     <div className={'bg-divider w-hidden h-1 md:block'} />
                     {entries}
-                    <SidebarEntry href={route('leave')} icon={EditIcon} label={'Verlofaanvraag maken'} />
                     <div className={'mt-0 ml-auto md:mt-auto md:ml-0'}>
                         <SidebarEntry href={route('logout')} method="post" icon={LogoutIcon} label={'Uitloggen'} />
                     </div>

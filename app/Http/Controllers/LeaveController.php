@@ -12,7 +12,7 @@ class LeaveController extends Controller
 {
     public function index()
     {
-
+        return inertia('leave-overview');
     }
 
     public function show(string $id)

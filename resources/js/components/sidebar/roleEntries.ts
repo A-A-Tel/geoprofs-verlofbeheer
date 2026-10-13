@@ -1,6 +1,7 @@
 import { SidebarEntryProps } from '@/components/sidebar/SidebarEntry';
-import { RoleLevel } from '@/types/types';
+import { Role, RoleLevel } from '@/types/types';
 import EditIcon from '@mui/icons-material/Edit';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 type RoleSidebarEntries = SidebarEntryProps & {
     level: RoleLevel;
@@ -8,21 +9,27 @@ type RoleSidebarEntries = SidebarEntryProps & {
 
 const entries: RoleSidebarEntries[] = [
     {
-        href: route('leave'),
+        href: route('leave.create'),
         label: 'Verlofaanvraag aanmaken',
         icon: EditIcon,
         level: RoleLevel.Employee
     },
     {
-        href: route(''),
-        label: 'Verlofaanvragen inzien',
-        icon: EditIcon,
+        href: route('leave.index'),
+        label: 'Verlofoverzicht',
+        icon: ReceiptIcon,
         level: RoleLevel.Manager
     },
 ];
 
+export default function getFilteredEntries(role: Role|null): SidebarEntryProps[] {
 
-export default function getFilteredEntries(role: RoleLevel): SidebarEntryProps[] {
-    console.log(role);
-    return [];
+    const roleLevels: RoleLevel[] = [];
+
+    while (role != null) {
+        roleLevels.push(role.id);
+        role = role.parent;
+    }
+
+    return entries.filter(entry => roleLevels.includes(entry.level));
 }
