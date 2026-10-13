@@ -66,3 +66,10 @@ export const KNOPTEST2: Story = {
         label: 'Button',
     },
 };
+
+export const Button123: Story = {
+    args: {
+        primary: false,
+        label: 'Button',
+    },
+};
