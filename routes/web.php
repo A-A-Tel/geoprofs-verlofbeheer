@@ -21,3 +21,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('leave', LeaveController::class);
 });
+
+Route::get('/user', function () {
+    return Inertia::render('straks aanvullen**', []);
+});

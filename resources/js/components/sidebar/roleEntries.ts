@@ -2,6 +2,7 @@ import { SidebarEntryProps } from '@/components/sidebar/SidebarEntry';
 import { Role, RoleLevel } from '@/types/types';
 import EditIcon from '@mui/icons-material/Edit';
 import ReceiptIcon from '@mui/icons-material/Receipt';
+import GroupIcon from '@mui/icons-material/Group';
 
 type RoleSidebarEntries = SidebarEntryProps & {
     level: RoleLevel;
@@ -12,13 +13,19 @@ const entries: RoleSidebarEntries[] = [
         href: route('leave.create'),
         label: 'Verlofaanvraag aanmaken',
         icon: EditIcon,
-        level: RoleLevel.Employee
+        level: RoleLevel.Employee,
+    },
+    {
+        href: route('leave.index'),
+        label: 'Gebruikers inzien',
+        icon: GroupIcon,
+        level: RoleLevel.Employee,
     },
     {
         href: route('leave.index'),
         label: 'Verlofoverzicht',
         icon: ReceiptIcon,
-        level: RoleLevel.Manager
+        level: RoleLevel.Manager,
     },
 ];
 
