@@ -13,11 +13,13 @@ export function Sidebar({ children }: SidebarProps) {
     const { props } = useTypedPage();
 
     const entryProps = getFilteredEntries(props.auth?.role?? null);
-    const entries = entryProps.map((props) => (<SidebarEntry {...props} />))
+
+    let i = 0;
+    const entries = entryProps.map((props) => (<SidebarEntry key={i+=1} {...props} />))
 
     return (
         <div className="flex w-full flex-col md:flex-row">
-            <div className={'bg-primary-light md:h-screen w-full md:w-fit mb-15 md:m-0'}>
+            <div className={'bg-primary-light md:min-h-screen w-full md:w-fit mb-5 md:m-0'}>
                 <nav className={'flex gap-2 md:flex-col'}>
                     <h1 className={'m-5 hidden text-3xl font-bold text-white md:block'}>GeoProfs</h1>
                     <div className={'bg-divider w-hidden h-1 md:block'} />
