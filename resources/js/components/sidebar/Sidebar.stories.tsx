@@ -1,7 +1,7 @@
 // resources/js/components/sidebar/Sidebar.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react-vite';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
     title: 'Sidebar/Sidebar',
