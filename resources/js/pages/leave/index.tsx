@@ -28,7 +28,7 @@ export default function Index({ leaves }: LeaveOverviewProps) {
 
     return (
         <>
-            <Sidebar children={[<LeaveList leaves={tempLeaves} />]} />
+            <Sidebar children={[<LeaveList key='leave-list' leaves={tempLeaves} />]} />
         </>
     );
 }

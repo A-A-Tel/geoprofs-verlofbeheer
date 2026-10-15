@@ -17,7 +17,7 @@ export default function Create({ types, availableDays }: LeaveProps) {
     return (
         <>
             <Sidebar children={[
-                <LeaveCreateModal types={types} availableDays={availableDays} />
+                <LeaveCreateModal key='leave-create-modal' types={types} availableDays={availableDays} />
             ]} />
         </>
     );
