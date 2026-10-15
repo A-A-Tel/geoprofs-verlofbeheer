@@ -24,7 +24,7 @@ export default function Index({ leaves }: LeaveOverviewProps) {
             requester: 'Harry',
         },
     ];
-    console.log(leaves);
+    leaves.push();
 
     return (
         <>

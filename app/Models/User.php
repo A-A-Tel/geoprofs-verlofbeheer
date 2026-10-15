@@ -107,8 +107,10 @@ class User extends Authenticatable
         }
         $servicePeriodEnds = $currentServicePeriod->copy()->addYear();
 
-        $leaves = $this->leaves()->whereBetween('start_on', [$currentServicePeriod, $servicePeriodEnds])
-            ->where(['status' => LeaveStatus::declined], 'not like')
+        $leaves = $this->leaves()
+            ->where('start_on', '>=', $currentServicePeriod)
+            ->where('start_on', '<', $servicePeriodEnds)
+            ->where('status', '!=', LeaveStatus::declined)
             ->get();
 
         foreach ($leaves as $leave) {

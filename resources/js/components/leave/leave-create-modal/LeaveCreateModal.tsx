@@ -1,4 +1,4 @@
-import { Form } from '@inertiajs/react';
+import { Form, router } from '@inertiajs/react';
 import { LeaveType, Status } from '@/types';
 import { InfoPopup } from '@/components/info-popup';
 import { useEffect, useState } from 'react';
@@ -28,6 +28,14 @@ function getAmountOfDays(date1: Date, date2: Date) {
     return rawDays + 1;
 }
 
+function isBeforeToday(date: Date): boolean {
+    const now = new Date();
+    const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    const comparable = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+
+    return comparable < today;
+}
+
 export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
     const [popup, setPopup] = useState<InfoPopupData>({content: '', title: '', isOpen: false});
 
@@ -35,7 +43,7 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
 
     const status = new URL(url, location.origin)
         .searchParams
-        .get('status');
+        .get('status') as Status|null;
 
     useEffect(() => {
         if (status !== null) {
@@ -53,6 +61,9 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
                     content: 'Je aanvraag is verstuurd.'
                 })
             }
+            router.visit(window.location.pathname, {
+                preserveState: true,
+            });
         }
     }, [status]);
 
@@ -64,7 +75,7 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
     }
 
     return (
-        <div className={`m-auto`}>
+        <div className={`my-auto `}>
             <InfoPopup title={popup.title} content={popup.content} isOpen={popup.isOpen} onClose={closePopup} />
             <Form
                 className={'bg-primary-light text-text-primary border-text-secondary m-auto rounded-3xl border-3 p-8 w-full'}
@@ -86,7 +97,7 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
                     const amountOfDays = endData ? getAmountOfDays(startDate, endData) : 1;
 
 
-                    if (Date.now() > startDate.getTime()) {
+                    if (isBeforeToday(startDate)) {
                         setPopup({
                             isOpen: true,
                             title: "Invalide datum",
@@ -118,6 +129,10 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
                 }
             >
                 <h1 className='md:text-4xl text-3xl font-bold'>Stuur een verlofaanvraag</h1>
+
+                <p className='mt-3 text-lg md:text-xl'>
+                    Je hebt nog {availableDays} verlofdag{availableDays === 1 ? '' : 'en'} over.
+                </p>
 
                 <h2 className='md:text-2xl text-xl font-semibold mt-9 mb-4'>Verlofaanvraag type*</h2>
                 <select

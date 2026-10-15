@@ -46,10 +46,9 @@ class LeaveController extends Controller
             return redirect()->route('leave.create', ['status' => 'failed']);
         }
 
-        Log::warning($leave->start_on);
         $leave->save();
 
-        return redirect()->route('leave.store', ['status' => 'success']);
+        return redirect()->route('leave.create', ['status' => 'success']);
     }
 
     public function edit(string $id)

@@ -9,7 +9,6 @@ export type LeaveRequestOverviewProps = {
 };
 
 export function LeaveList({ leaves }: LeaveRequestOverviewProps) {
-    console.log(leaves);
     const entries = leaves.map((leave) => {
         return <LeaveListEntry key={leave.id} type={leave.type} action={'#'} requester={leave.requester} />;
     });
