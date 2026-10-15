@@ -28,8 +28,7 @@ Met deze commando's kun je de code standaardiseren.
 PHP:
 ```shell
 php ./vendor/bin/pint
-```
-
+```X
 React:
 ```shell
 npm run format
