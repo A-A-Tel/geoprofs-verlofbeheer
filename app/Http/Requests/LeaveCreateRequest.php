@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\RoleLevel;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
 
 class LeaveCreateRequest extends FormRequest
 {
@@ -18,6 +17,7 @@ class LeaveCreateRequest extends FormRequest
         if ($user == null) {
             return false;
         }
+
         return $user->hasRoleLevel(RoleLevel::Employee);
     }
 

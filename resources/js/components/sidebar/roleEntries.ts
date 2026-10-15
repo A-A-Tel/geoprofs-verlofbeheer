@@ -5,25 +5,24 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 
 type RoleSidebarEntries = SidebarEntryProps & {
     level: RoleLevel;
-}
+};
 
 const entries: RoleSidebarEntries[] = [
     {
         href: route('leave.create'),
         label: 'Verlofaanvraag aanmaken',
         icon: EditIcon,
-        level: RoleLevel.Employee
+        level: RoleLevel.Employee,
     },
     {
         href: route('leave.index'),
         label: 'Verlofoverzicht',
         icon: ReceiptIcon,
-        level: RoleLevel.Manager
+        level: RoleLevel.Manager,
     },
 ];
 
-export default function getFilteredEntries(role: Role|null): SidebarEntryProps[] {
-
+export default function getFilteredEntries(role: Role | null): SidebarEntryProps[] {
     const roleLevels: RoleLevel[] = [];
 
     while (role != null) {
@@ -31,5 +30,5 @@ export default function getFilteredEntries(role: Role|null): SidebarEntryProps[]
         role = role.parent;
     }
 
-    return entries.filter(entry => roleLevels.includes(entry.level));
+    return entries.filter((entry) => roleLevels.includes(entry.level));
 }

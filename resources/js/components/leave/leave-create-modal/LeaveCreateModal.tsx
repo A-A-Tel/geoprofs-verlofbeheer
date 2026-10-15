@@ -1,21 +1,21 @@
-import { Form, router } from '@inertiajs/react';
-import { LeaveType, Status } from '@/types';
 import { InfoPopup } from '@/components/info-popup';
-import { useEffect, useState } from 'react';
 import { InfoPopupData } from '@/components/info-popup/InfoPopup';
 import { useTypedPage } from '@/hooks/typedPage';
+import { LeaveType, Status } from '@/types';
+import { Form, router } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 export type LeaveModalProps = {
     types: LeaveType[];
     availableDays: number;
-}
+};
 
 type LeaveFormProps = {
     reason: string;
     type: string;
     start_on: string;
     end_on: string;
-}
+};
 
 function getAmountOfDays(date1: Date, date2: Date) {
     const msPerDay = 86_400_000;
@@ -36,14 +36,12 @@ function isBeforeToday(date: Date): boolean {
     return comparable < today;
 }
 
-export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
-    const [popup, setPopup] = useState<InfoPopupData>({content: '', title: '', isOpen: false});
+export function LeaveCreateModal({ types, availableDays }: LeaveModalProps) {
+    const [popup, setPopup] = useState<InfoPopupData>({ content: '', title: '', isOpen: false });
 
     const { url } = useTypedPage();
 
-    const status = new URL(url, location.origin)
-        .searchParams
-        .get('status') as Status|null;
+    const status = new URL(url, location.origin).searchParams.get('status') as Status | null;
 
     useEffect(() => {
         if (status !== null) {
@@ -51,15 +49,14 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
                 setPopup({
                     isOpen: true,
                     title: 'Er is iets mis gegaan',
-                    content: 'Let op dat je niet te veel dagen vrij hebt geprobeerd te nemen'
+                    content: 'Let op dat je niet te veel dagen vrij hebt geprobeerd te nemen',
                 });
-            }
-            else {
+            } else {
                 setPopup({
                     isOpen: true,
                     title: 'Gelukt!',
-                    content: 'Je aanvraag is verstuurd.'
-                })
+                    content: 'Je aanvraag is verstuurd.',
+                });
             }
             router.visit(window.location.pathname, {
                 preserveState: true,
@@ -68,26 +65,25 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
     }, [status]);
 
     const closePopup = () => {
-        setPopup(popup => ({
+        setPopup((popup) => ({
             ...popup,
-            isOpen: false
+            isOpen: false,
         }));
-    }
+    };
 
     return (
-        <div className={`my-auto `}>
+        <div className={`my-auto`}>
             <InfoPopup title={popup.title} content={popup.content} isOpen={popup.isOpen} onClose={closePopup} />
             <Form
-                className={'bg-primary-light text-text-primary border-text-secondary m-auto rounded-3xl border-3 p-8 w-full'}
+                className={'bg-primary-light text-text-primary border-text-secondary m-auto w-full rounded-3xl border-3 p-8'}
                 method="post"
                 action={route('leave.store')}
-                onBefore={
-                (event) => {
+                onBefore={(event) => {
                     const data = event.data as LeaveFormProps;
 
                     const type = data.type as string;
                     const startOn = data.start_on as string;
-                    const endOn = data.end_on as string|null;
+                    const endOn = data.end_on as string | null;
 
                     if (type !== '1') return true;
 
@@ -96,22 +92,21 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
 
                     const amountOfDays = endData ? getAmountOfDays(startDate, endData) : 1;
 
-
                     if (isBeforeToday(startDate)) {
                         setPopup({
                             isOpen: true,
-                            title: "Invalide datum",
-                            content: "Begindatum kan niet in het verleden liggen."
-                        })
+                            title: 'Invalide datum',
+                            content: 'Begindatum kan niet in het verleden liggen.',
+                        });
                         return false;
                     }
 
                     if (amountOfDays < 1) {
                         setPopup({
                             isOpen: true,
-                            title: "Invalide datum",
-                            content: "Einddatum kan niet voor de begindatum liggen."
-                        })
+                            title: 'Invalide datum',
+                            content: 'Einddatum kan niet voor de begindatum liggen.',
+                        });
                         return false;
                     }
 
@@ -119,47 +114,59 @@ export function LeaveCreateModal({types, availableDays}: LeaveModalProps) {
                         setPopup({
                             isOpen: true,
                             title: 'Invalide duur',
-                            content: 'Je hebt niet genoeg verlofdagen hiervoor.'
-                        })
+                            content: 'Je hebt niet genoeg verlofdagen hiervoor.',
+                        });
                         return false;
                     }
 
                     return true;
-                }
-                }
+                }}
             >
-                <h1 className='md:text-4xl text-3xl font-bold'>Stuur een verlofaanvraag</h1>
+                <h1 className="text-3xl font-bold md:text-4xl">Stuur een verlofaanvraag</h1>
 
-                <p className='mt-3 text-lg md:text-xl'>
+                <p className="mt-3 text-lg md:text-xl">
                     Je hebt nog {availableDays} verlofdag{availableDays === 1 ? '' : 'en'} over.
                 </p>
 
-                <h2 className='md:text-2xl text-xl font-semibold mt-9 mb-4'>Verlofaanvraag type*</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Verlofaanvraag type*</h2>
                 <select
                     required
                     name="type"
-                    className="md:text-xl text-lg bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold w-full"
+                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 >
-                    {types.map((type) => <option key={type.id} value={type.id}>{type.name}</option>)}
+                    {types.map((type) => (
+                        <option key={type.id} value={type.id}>
+                            {type.name}
+                        </option>
+                    ))}
                 </select>
 
-                <h2 className='md:text-2xl font-semibold mt-9 mb-4 text-xl'>Begindatum*</h2>
-                <input name='start_on' required type="date" className='w-full text-lg md:text-xl bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold' />
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Begindatum*</h2>
+                <input
+                    name="start_on"
+                    required
+                    type="date"
+                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                />
 
-                <h2 className='md:text-2xl font-semibold mt-9 mb-4 text-xl'>Einddatum</h2>
-                <input name='end_on' type="date" className='text-lg w-full md:text-xl bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold' />
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Einddatum</h2>
+                <input
+                    name="end_on"
+                    type="date"
+                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                />
 
-                <h2 className='md:text-2xl text-xl font-semibold mt-9 mb-4'>Verlofaanvraag reden*</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Verlofaanvraag reden*</h2>
                 <textarea
                     required
                     name="reason"
                     placeholder={'...'}
-                    className={'w-full text-lg md:text-xl bg-primary-dark border-text-secondary h-30 rounded-md border-2 p-2'}
+                    className={'bg-primary-dark border-text-secondary h-30 w-full rounded-md border-2 p-2 text-lg md:text-xl'}
                 />
                 <button
-                    type='submit'
+                    type="submit"
                     className={
-                        'w-full text-xl md:text-2xl mt-9 bg-background border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold'
+                        'bg-background border-text-secondary mt-9 flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold md:text-2xl'
                     }
                 >
                     Versturen

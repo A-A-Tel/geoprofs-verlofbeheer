@@ -9,7 +9,7 @@ type LeaveOverviewProps = {
 export default function LeaveOverview({ leave }: LeaveOverviewProps) {
     return (
         <>
-            <Sidebar children={[<LeaveReviewModal key='leave-review-modal' leave={leave} />]} />
+            <Sidebar children={[<LeaveReviewModal key="leave-review-modal" leave={leave} />]} />
         </>
     );
 }

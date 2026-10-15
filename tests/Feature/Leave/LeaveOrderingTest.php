@@ -44,7 +44,7 @@ class LeaveOrderingTest extends TestCase
         $response = $this->post(route('leave.store'), [
             'type' => $leaveType->id,
             'reason' => 'Past Vacation',
-            'start_on' => now()->subDays(5)
+            'start_on' => now()->subDays(5),
         ]);
 
         $response->assertInvalid(['start_on']);

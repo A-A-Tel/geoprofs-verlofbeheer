@@ -1,6 +1,4 @@
-import { http } from '@inertiajs/core';
 import { createInertiaApp } from '@inertiajs/react';
-import { setupCaseShift, transformInitialPage } from 'inertia-caseshift';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { route as routeFn } from 'ziggy-js';
