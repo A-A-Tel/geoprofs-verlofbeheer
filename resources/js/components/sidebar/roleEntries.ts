@@ -16,7 +16,7 @@ const entries: RoleSidebarEntries[] = [
         level: RoleLevel.Employee,
     },
     {
-        href: route('leave.index'),
+        href: route('user.index'),
         label: 'Gebruikers inzien',
         icon: GroupIcon,
         level: RoleLevel.Employee,
