@@ -7,7 +7,6 @@ type LeaveOverviewProps = {
 };
 
 export default function Index({ leaves }: LeaveOverviewProps) {
-
     return (
         <>
             <Sidebar children={[<LeaveList key="leave-list" leaves={leaves} />]} />

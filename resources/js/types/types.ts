@@ -31,7 +31,7 @@ export type LeaveType = {
 export type Leave = {
     id: number;
     type: LeaveType;
-    requester: UserData
+    requester: UserData;
     reason: string;
 };
 export type Status = 'success' | 'failed';

@@ -1,8 +1,8 @@
-import { LeaveListEntry } from './LeaveListEntry';
 import { Leave } from '@/types';
+import { LeaveListEntry } from './LeaveListEntry';
 
 export type LeaveRequestOverviewProps = {
-    leaves: Leave[]
+    leaves: Leave[];
 };
 
 export function LeaveList({ leaves }: LeaveRequestOverviewProps) {
