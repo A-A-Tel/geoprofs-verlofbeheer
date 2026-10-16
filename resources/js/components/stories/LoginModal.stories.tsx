@@ -1,20 +1,15 @@
-// resources/js/components/sidebar/Sidebar.stories.tsx
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import LogoutIcon from '@mui/icons-material/Logout';
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import { LoginModal } from '@/components/login-modal';
 import { Form } from '@inertiajs/react';
 
-const meta = {
-    title: 'login-modal/login-modal',
-    parameters: { layout: 'fullscreen' },
-} satisfies Meta;
+export default {
+    title: 'LoginModal/LoginModal',
+    component: LoginModal,
+};
 
-export default meta;
-
-export const Default: StoryObj = {
+export const LoginFormulier = {
     render: () => (
         <div className={`grid h-screen w-full items-center`}>
-            <form
+            <Form
                 className={'bg-primary-light text-text-primary border-text-secondary m-auto grid gap-12 rounded-3xl border-3 p-8 md:w-1/3'}
             >
                 <div className={'grid flex-col gap-2'}>
@@ -45,7 +40,7 @@ export const Default: StoryObj = {
                 >
                     Inloggen
                 </button>
-            </form>
+            </Form>
         </div>
     ),
 };
