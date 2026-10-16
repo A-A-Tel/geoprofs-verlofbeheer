@@ -20,13 +20,13 @@ export type UserSettings = {
 export type Role = {
     id: RoleLevel;
     name: string;
-    parent: Role|null
+    parent: Role | null;
 };
 
 export type LeaveType = {
     id: number;
     name: string;
-}
+};
 
 export type Leave = {
     id: number;

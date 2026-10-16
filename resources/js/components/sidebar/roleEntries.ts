@@ -1,12 +1,12 @@
 import { SidebarEntryProps } from '@/components/sidebar/SidebarEntry';
 import { Role, RoleLevel } from '@/types/types';
 import EditIcon from '@mui/icons-material/Edit';
-import ReceiptIcon from '@mui/icons-material/Receipt';
 import GroupIcon from '@mui/icons-material/Group';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 type RoleSidebarEntries = SidebarEntryProps & {
     level: RoleLevel;
-}
+};
 
 const entries: RoleSidebarEntries[] = [
     {
@@ -29,8 +29,7 @@ const entries: RoleSidebarEntries[] = [
     },
 ];
 
-export default function getFilteredEntries(role: Role|null): SidebarEntryProps[] {
-
+export default function getFilteredEntries(role: Role | null): SidebarEntryProps[] {
     const roleLevels: RoleLevel[] = [];
 
     while (role != null) {
@@ -38,5 +37,5 @@ export default function getFilteredEntries(role: Role|null): SidebarEntryProps[]
         role = role.parent;
     }
 
-    return entries.filter(entry => roleLevels.includes(entry.level));
+    return entries.filter((entry) => roleLevels.includes(entry.level));
 }

@@ -15,10 +15,7 @@ class LeaveController extends Controller
         return inertia('leave-overview');
     }
 
-    public function show(string $id)
-    {
-
-    }
+    public function show(string $id) {}
 
     public function create()
     {
@@ -27,6 +24,7 @@ class LeaveController extends Controller
         if ($user == null || ! $user->hasRoleLevel(RoleLevel::Employee)) {
             return redirect()->back();
         }
+
         return inertia('leave', ['types' => LeaveType::all(), 'available_days' => $user->getRemainingLeaveDays()]);
     }
 
@@ -52,18 +50,9 @@ class LeaveController extends Controller
         return redirect()->route('leave.store', ['status' => 'success']);
     }
 
-    public function edit(string $id)
-    {
+    public function edit(string $id) {}
 
-    }
+    public function update(string $id) {}
 
-    public function update(string $id)
-    {
-
-    }
-
-    public function destroy(string $id)
-    {
-
-    }
+    public function destroy(string $id) {}
 }

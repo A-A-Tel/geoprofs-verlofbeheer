@@ -11,33 +11,15 @@ class UserController extends Controller
         return inertia('user');
     }
 
-    public function show(string $id)
-    {
+    public function show(string $id) {}
 
-    }
+    public function create() {}
 
-    public function create()
-    {
+    public function store(LeaveCreateRequest $request) {}
 
-    }
+    public function edit(string $id) {}
 
-    public function store(LeaveCreateRequest $request)
-    {
+    public function update(string $id) {}
 
-    }
-
-    public function edit(string $id)
-    {
-
-    }
-
-    public function update(string $id)
-    {
-
-    }
-
-    public function destroy(string $id)
-    {
-
-    }
+    public function destroy(string $id) {}
 }

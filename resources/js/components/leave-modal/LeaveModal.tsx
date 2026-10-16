@@ -1,12 +1,13 @@
-import { Form } from '@inertiajs/react';
 import { LeaveType } from '@/types';
+import { Form } from '@inertiajs/react';
 
 export type LeaveModalProps = {
     types: LeaveType[];
     availableDays: number;
-}
+};
 
-export function LeaveModal({types, availableDays}: LeaveModalProps) {
+export function LeaveModal({ types, availableDays }: LeaveModalProps) {
+    console.log(availableDays);
     return (
         <div className={`grid h-full w-full items-center`}>
             <Form
@@ -14,34 +15,47 @@ export function LeaveModal({types, availableDays}: LeaveModalProps) {
                 method="post"
                 action={route('leave.store')}
             >
-                <h1 className='text-4xl font-bold'>Stuur een verlofaanvraag</h1>
+                <h1 className="text-4xl font-bold">Stuur een verlofaanvraag</h1>
 
-                <h2 className='text-2xl font-semibold mt-9 mb-4'>Verlofaanvraag type*</h2>
+                <h2 className="mt-9 mb-4 text-2xl font-semibold">Verlofaanvraag type*</h2>
                 <select
                     required
                     name="type"
-                    className="text-xl bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold"
+                    className="bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold"
                 >
-                    {types.map((type) => <option key={type.id} value={type.id}>{type.name}</option>)}
+                    {types.map((type) => (
+                        <option key={type.id} value={type.id}>
+                            {type.name}
+                        </option>
+                    ))}
                 </select>
 
-                <h2 className='text-2xl font-semibold mt-9 mb-4'>Begindatum*</h2>
-                <input name='start_on' required type="date" className='text-xl bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold' />
+                <h2 className="mt-9 mb-4 text-2xl font-semibold">Begindatum*</h2>
+                <input
+                    name="start_on"
+                    required
+                    type="date"
+                    className="bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold"
+                />
 
-                <h2 className='text-2xl font-semibold mt-9 mb-4'>Einddatum</h2>
-                <input name='end_on' type="date" className='text-xl bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold' />
+                <h2 className="mt-9 mb-4 text-2xl font-semibold">Einddatum</h2>
+                <input
+                    name="end_on"
+                    type="date"
+                    className="bg-primary-dark border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold"
+                />
 
-                <h2 className='text-2xl font-semibold mt-9 mb-4'>Verlofaanvraag reden*</h2>
+                <h2 className="mt-9 mb-4 text-2xl font-semibold">Verlofaanvraag reden*</h2>
                 <textarea
                     required
                     name="reason"
                     placeholder={'...'}
-                    className={'text-xl bg-primary-dark border-text-secondary h-30 rounded-md border-2 p-2'}
+                    className={'bg-primary-dark border-text-secondary h-30 rounded-md border-2 p-2 text-xl'}
                 />
                 <button
-                    type='submit'
+                    type="submit"
                     className={
-                        'text-2xl mt-9 bg-background border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold'
+                        'bg-background border-text-secondary mt-9 flex cursor-pointer items-center justify-center rounded-md border-2 p-2 text-2xl font-bold'
                     }
                 >
                     Versturen

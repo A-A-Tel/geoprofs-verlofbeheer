@@ -13,7 +13,7 @@ export type UserListOverviewProps = {
 
 export function UserList({ users }: UserListOverviewProps) {
     return (
-        <div className="flex flex-wrap p-5 items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 p-5">
             {users.map((user) => (
                 <UserListEntry key={user.id} id={user.id} first_name={user.first_name} last_name={user.last_name} action={user.action} />
             ))}

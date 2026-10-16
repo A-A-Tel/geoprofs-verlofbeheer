@@ -13,12 +13,10 @@ export default function Leave({ types, availableDays }: LeaveProps) {
 
     const params = new URLSearchParams(url);
     const succeeded = params.get('succeeded') as Succeeded | null;
-
+    console.log(succeeded);
     return (
         <>
-            <Sidebar children={[
-                <LeaveModal types={types} availableDays={availableDays} />
-            ]} />
+            <Sidebar children={[<LeaveModal types={types} availableDays={availableDays} />]} />
         </>
     );
 }

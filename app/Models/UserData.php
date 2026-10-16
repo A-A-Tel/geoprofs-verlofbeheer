@@ -36,7 +36,7 @@ class UserData extends Model
     protected function casts(): array
     {
         return [
-            'started_service_on' => 'date'
+            'started_service_on' => 'date',
         ];
     }
 }

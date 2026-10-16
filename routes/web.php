@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,5 +21,5 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('leave', LeaveController::class);
-    Route::resource('user', \App\Http\Controllers\UserController::class);
+    Route::resource('user', UserController::class);
 });
