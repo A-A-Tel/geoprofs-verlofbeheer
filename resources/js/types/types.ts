@@ -20,15 +20,18 @@ export type UserSettings = {
 export type Role = {
     id: RoleLevel;
     name: string;
+    parent: Role | null;
+};
+
+export type LeaveType = {
+    id: number;
+    name: string;
 };
 
 export type Leave = {
     id: number;
-    type: {
-        id: number;
-        name: string;
-    };
+    type: LeaveType;
     requester: UserData;
     reason: string;
 };
-export type Succeeded = 'yes' | 'no';
+export type Status = 'success' | 'failed';

@@ -14,8 +14,8 @@ class Leave extends Model
 
     protected $fillable = [
         'reason',
-        'start_date',
-        'end_date',
+        'start_on',
+        'end_on',
     ];
 
     protected $hidden = [
@@ -28,6 +28,8 @@ class Leave extends Model
     {
         return [
             'status' => LeaveStatus::class,
+            'start_on' => 'date',
+            'end_on' => 'date',
         ];
     }
 
@@ -57,7 +59,7 @@ class Leave extends Model
             return 1;
         }
 
-        return (int) $this->start_on->diffInDays($this->end_on);
+        return (int) $this->start_on->diffInDays($this->end_on) + 1;
     }
 
     public function getActivitylogOptions(): LogOptions

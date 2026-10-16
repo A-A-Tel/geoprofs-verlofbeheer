@@ -50,3 +50,7 @@
 body {
     background: var(--background);
 }
+
+button {
+    cursor: pointer;
+}

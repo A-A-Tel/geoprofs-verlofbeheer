@@ -1,4 +1,4 @@
-import { LeaveList } from '@/components/leave-list';
+import { LeaveList } from '@/components/leave/leave-list';
 import { Sidebar } from '@/components/sidebar';
 import { Leave } from '@/types';
 
@@ -6,7 +6,7 @@ type LeaveOverviewProps = {
     leaves: Leave[];
 };
 
-export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
+export default function Index({ leaves }: LeaveOverviewProps) {
     const tempLeaves = [
         {
             id: 1,
@@ -24,11 +24,11 @@ export default function LeaveOverview({ leaves }: LeaveOverviewProps) {
             requester: 'Harry',
         },
     ];
-    console.log(leaves);
+    leaves.push();
 
     return (
         <>
-            <Sidebar children={[<LeaveList leaves={tempLeaves} />]} />
+            <Sidebar children={[<LeaveList key="leave-list" leaves={tempLeaves} />]} />
         </>
     );
 }
