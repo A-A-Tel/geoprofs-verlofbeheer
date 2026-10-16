@@ -3,15 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LeaveCreateRequest;
+use App\LeaveStatus;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use App\RoleLevel;
+use Illuminate\Support\Facades\Log;
 
 class LeaveController extends Controller
 {
     public function index()
     {
-        return inertia('leave/index');
+        $user = auth()->user();
+
+        if (!$user->hasRoleLevel(RoleLevel::Manager)) {
+            return redirect()->route('dashboard');
+        }
+
+        $leaves = Leave::where([
+            'department_id' => $user->department_id,
+            'supervisor_id' => $user->id
+        ])
+        ->with([
+            'type', 'requester.data'
+        ])
+        ->get()
+        ->map(
+            function ($leave) {
+                $array = $leave->toArray();
+                $array['requester'] = $leave->requester->data->toArray();
+                return $array;
+            }
+        );
+
+        return inertia('leave/index', ['leaves' => $leaves]);
     }
 
     public function show(string $id) {}
@@ -34,8 +58,9 @@ class LeaveController extends Controller
 
         $leave = new Leave($data);
 
-        $leave->requester()->associate($user);
+        $leave->department()->associate($user->department);
         $leave->supervisor()->associate($user->supervisor);
+        $leave->requester()->associate($user);
         $leave->manager()->associate($user->department->getManager());
         $leave->type()->associate($data['type']);
 

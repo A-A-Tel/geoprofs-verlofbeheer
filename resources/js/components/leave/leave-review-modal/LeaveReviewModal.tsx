@@ -26,7 +26,7 @@ export function LeaveReviewModal({ leave }: LeaveRequestOverviewProps) {
                     <input
                         name="type"
                         disabled={true}
-                        placeholder={leave.requester.firstName + ' ' + leave.requester.lastName}
+                        placeholder={leave.requester.first_name + ' ' + leave.requester.last_name}
                         type={'text'}
                         className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
                     />
