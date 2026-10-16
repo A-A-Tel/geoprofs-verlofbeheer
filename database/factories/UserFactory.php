@@ -50,10 +50,10 @@ class UserFactory extends Factory
         });
     }
 
-    public function regularJoe(): static
+    public function geodesy(): static
     {
         return $this->state([
-            'email' => 'regu.larjoe@bedrijf.nl',
+            'email' => 'geo.desy@bedrijf.nl',
             'password' => Hash::make('Hallo12345%'),
             'department_id' => fn () => Department::where(['name' => 'Geodesy'])->firstOrFail()->id,
         ])->afterCreating(function (User $user) {

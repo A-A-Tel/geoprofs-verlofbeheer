@@ -6,13 +6,12 @@ use App\Http\Requests\LeaveCreateRequest;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use App\RoleLevel;
-use Illuminate\Support\Facades\Log;
 
 class LeaveController extends Controller
 {
     public function index()
     {
-        return inertia('leave-overview');
+        return inertia('leave/index');
     }
 
     public function show(string $id) {}
@@ -25,7 +24,7 @@ class LeaveController extends Controller
             return redirect()->back();
         }
 
-        return inertia('leave', ['types' => LeaveType::all(), 'available_days' => $user->getRemainingLeaveDays()]);
+        return inertia('leave/create', ['types' => LeaveType::all(), 'available_days' => $user->getRemainingLeaveDays()]);
     }
 
     public function store(LeaveCreateRequest $request)
@@ -44,10 +43,9 @@ class LeaveController extends Controller
             return redirect()->route('leave.create', ['status' => 'failed']);
         }
 
-        Log::warning($leave->start_on);
         $leave->save();
 
-        return redirect()->route('leave.store', ['status' => 'success']);
+        return redirect()->route('leave.create', ['status' => 'success']);
     }
 
     public function edit(string $id) {}

@@ -12,12 +12,12 @@ export type SidebarEntryProps = {
 export function SidebarEntry({ method = 'get', href, icon: Icon, label }: SidebarEntryProps) {
     const { url } = useTypedPage();
 
-    const isActive = url === href;
+    const isActive = url === new URL(href).pathname;
     return (
         <Link
             href={href}
             method={method}
-            className={`flex h-12 cursor-pointer items-center gap-2 rounded-xl p-2 font-bold whitespace-nowrap transition-colors ${
+            className={`mx-2 flex h-12 cursor-pointer items-center gap-2 rounded-xl p-3 font-bold whitespace-nowrap transition-colors ${
                 isActive ? 'bg-primary text-accent' : 'text-text-primary hover:bg-primary hover:text-accent'
             } `}
         >

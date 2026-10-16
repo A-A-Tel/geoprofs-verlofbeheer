@@ -31,8 +31,8 @@ class LeaveCreateRequest extends FormRequest
         return [
             'type' => 'required|exists:leave_types,id',
             'reason' => 'required|string|min:1|max:1024',
-            'start_on' => 'required|date',
-            'end_on' => 'nullable|date',
+            'start_on' => 'required|date|after_or_equal:today',
+            'end_on' => 'nullable|date|after_or_equal:start_on',
         ];
     }
 }

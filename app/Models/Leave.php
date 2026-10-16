@@ -59,7 +59,7 @@ class Leave extends Model
             return 1;
         }
 
-        return (int) $this->start_on->diffInDays($this->end_on);
+        return (int) $this->start_on->diffInDays($this->end_on) + 1;
     }
 
     public function getActivitylogOptions(): LogOptions

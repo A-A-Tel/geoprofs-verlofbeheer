@@ -1,4 +1,4 @@
-import { LeaveListEntry } from '@/components/leave-list/LeaveListEntry';
+import { LeaveListEntry } from './LeaveListEntry';
 
 export type LeaveRequestOverviewProps = {
     leaves: {
@@ -9,7 +9,6 @@ export type LeaveRequestOverviewProps = {
 };
 
 export function LeaveList({ leaves }: LeaveRequestOverviewProps) {
-    console.log(leaves);
     const entries = leaves.map((leave) => {
         return <LeaveListEntry key={leave.id} type={leave.type} action={'#'} requester={leave.requester} />;
     });
