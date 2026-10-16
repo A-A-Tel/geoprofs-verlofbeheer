@@ -8,9 +8,9 @@ export enum RoleLevel {
 
 export type UserData = {
     userId: number;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
 };
 
 export type UserSettings = {
