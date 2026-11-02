@@ -18,8 +18,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $officeManager = new User([
+            'email' => 'kan.toor@bedrijf.nl',
+            'password' => 'Hallo12345%',
+        ]);
+        $officeManager->role()->associate(Role::findOrFail(RoleLevel::OfficeManager));
+        $officeManager->department()->associate(Department::where('name', 'Office')->firstOrFail());
+        $officeManager->save();
+
         $departmentManager = new User([
-            'email' => 'Afd.Eling@bedrijf.nl',
+            'email' => 'afd.eling@bedrijf.nl',
             'password' => 'Hallo12345%',
         ]);
         $departmentManager->role()->associate(Role::findOrFail(RoleLevel::DepartmentManager));
@@ -56,6 +64,10 @@ class UserSeeder extends Seeder
         $departmentManagerSetting->user()->associate($departmentManager);
         $departmentManagerSetting->save();
 
+        $officeManagerSetting = new UserSetting;
+        $officeManagerSetting->user()->associate($officeManager);
+        $officeManagerSetting->save();
+
         $employeeData = new UserData([
             'first_name' => 'Regu',
             'last_name' => 'Larjoe',
@@ -69,19 +81,21 @@ class UserSeeder extends Seeder
         $employeeData->save();
 
         $managerData = $employeeData->replicate();
-        $managerData->update([
-            'first_name' => 'Man',
-            'last_name' => 'Ager',
-        ]);
+        $managerData->first_name = 'Man';
+        $managerData->last_name = 'Ager';
         $managerData->user()->associate($manager);
         $managerData->save();
 
         $departmentManagerData = $managerData->replicate();
-        $departmentManagerData->update([
-            'first_name' => 'Afd',
-            'last_name' => 'Eling',
-        ]);
+        $departmentManagerData->first_name = 'Afd';
+        $departmentManagerData->last_name = 'Eling';
         $departmentManagerData->user()->associate($departmentManager);
         $departmentManagerData->save();
+
+        $officeManagerData = $departmentManagerData->replicate();
+        $officeManagerData->first_name = 'Kan';
+        $officeManagerData->last_name = 'Toor';
+        $officeManagerData->user()->associate($officeManager);
+        $officeManagerData->save();
     }
 }

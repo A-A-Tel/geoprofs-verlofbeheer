@@ -7,14 +7,14 @@ export enum RoleLevel {
 }
 
 export type UserData = {
-    userId: number;
+    user_id: number;
     first_name: string;
     last_name: string;
     phone_number: string;
 };
 
 export type UserSettings = {
-    notificationSound: boolean;
+    notification_sound: boolean;
 };
 
 export type Role = {
