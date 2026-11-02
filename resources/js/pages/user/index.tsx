@@ -3,8 +3,8 @@ import { UserList } from '@/components/user-list';
 import { UserData } from '@/types';
 
 type UserOverviewProps = {
-    users: UserData[]
-}
+    users: UserData[];
+};
 
 export default function Index({ users }: UserOverviewProps) {
     return (

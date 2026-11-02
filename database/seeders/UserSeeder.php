@@ -87,8 +87,8 @@ class UserSeeder extends Seeder
         $managerData->save();
 
         $departmentManagerData = $managerData->replicate();
-        $departmentManagerData->first_name = "Afd";
-        $departmentManagerData->last_name = "Eling";
+        $departmentManagerData->first_name = 'Afd';
+        $departmentManagerData->last_name = 'Eling';
         $departmentManagerData->user()->associate($departmentManager);
         $departmentManagerData->save();
 
