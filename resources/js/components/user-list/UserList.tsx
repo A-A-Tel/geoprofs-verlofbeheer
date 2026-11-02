@@ -1,21 +1,15 @@
 import { UserListEntry } from '@/components/user-list/UserListEntry';
-
-type User = {
-    first_name: string;
-    last_name: string;
-    id: number;
-    action: string;
-};
+import { UserData } from '@/types';
 
 export type UserListOverviewProps = {
-    users: User[];
+    users: UserData[];
 };
 
 export function UserList({ users }: UserListOverviewProps) {
     return (
         <div className="flex flex-wrap items-center gap-3 p-5">
             {users.map((user) => (
-                <UserListEntry key={user.id} id={user.id} first_name={user.first_name} last_name={user.last_name} action={user.action} />
+                <UserListEntry key={user.user_id} id={user.user_id} first_name={user.first_name} last_name={user.last_name} />
             ))}
         </div>
     );
