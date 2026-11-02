@@ -22,4 +22,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('leave', LeaveController::class);
     Route::resource('user', UserController::class);
+    Route::resource('user-creation', UserController::class);
 });

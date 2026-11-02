@@ -9,7 +9,7 @@ export type UserListOverviewProps = {
 export function UserList({ users }: UserListOverviewProps) {
     return (
         <div className={'flex flex-col'}>
-            <Link className={'ml-5 w-65'} href={'#'}>
+            <Link className={'ml-5 w-65'} href={'user/create'}>
                 <button className={'bg-secondary text-text-primary w-65 rounded-md p-1'}>Nieuwe gebruiker aanmaken</button>
             </Link>
             <div className="flex flex-wrap items-center gap-3 p-5">
