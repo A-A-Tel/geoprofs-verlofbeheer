@@ -14,8 +14,8 @@ class Leave extends Model
 
     protected $fillable = [
         'reason',
-        'start_date',
-        'end_date',
+        'start_on',
+        'end_on',
     ];
 
     protected $hidden = [
@@ -28,22 +28,29 @@ class Leave extends Model
     {
         return [
             'status' => LeaveStatus::class,
+            'start_on' => 'date',
+            'end_on' => 'date',
         ];
+    }
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
     }
 
     public function supervisor(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'supervisor_id');
     }
 
     public function requester(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'requester_id');
     }
 
     public function manager(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'manager_id');
     }
 
     public function type(): BelongsTo
@@ -57,7 +64,7 @@ class Leave extends Model
             return 1;
         }
 
-        return (int) $this->start_on->diffInDays($this->end_on);
+        return (int) $this->start_on->diffInDays($this->end_on) + 1;
     }
 
     public function getActivitylogOptions(): LogOptions

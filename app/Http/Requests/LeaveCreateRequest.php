@@ -6,7 +6,7 @@ use App\RoleLevel;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LeaveOrderRequest extends FormRequest
+class LeaveCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,8 +31,8 @@ class LeaveOrderRequest extends FormRequest
         return [
             'type' => 'required|exists:leave_types,id',
             'reason' => 'required|string|min:1|max:1024',
-            'start_on' => 'required|date_format:Y-m-d\TH:i:s.v\Z',
-            'end_on' => 'nullable|date_format:Y-m-d\TH:i:s.v\Z',
+            'start_on' => 'required|date|after_or_equal:today',
+            'end_on' => 'nullable|date|after_or_equal:start_on',
         ];
     }
 }

@@ -18,7 +18,7 @@ php artisan migrate:fresh --seed
 
 Je kan het project uitvoeren met:
 ```shell
-node ./node_modules/concurrently/dist/bin/index.js "php artisan serve" "npm run dev"
+composer run dev
 ```
 
 ## Format
@@ -28,7 +28,7 @@ Met deze commando's kun je de code standaardiseren.
 PHP:
 ```shell
 php ./vendor/bin/pint
-```X
+```
 React:
 ```shell
 npm run format

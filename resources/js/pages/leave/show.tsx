@@ -1,4 +1,4 @@
-import { LeaveReviewModal } from '@/components/leave-review-modal';
+import { LeaveReviewModal } from '@/components/leave/leave-review-modal';
 import { Sidebar } from '@/components/sidebar';
 import { Leave } from '@/types';
 
@@ -9,7 +9,7 @@ type LeaveOverviewProps = {
 export default function LeaveOverview({ leave }: LeaveOverviewProps) {
     return (
         <>
-            <Sidebar children={[<LeaveReviewModal leave={leave} />]} />
+            <Sidebar children={[<LeaveReviewModal key="leave-review-modal" leave={leave} />]} />
         </>
     );
 }

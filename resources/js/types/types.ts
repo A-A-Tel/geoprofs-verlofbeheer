@@ -8,9 +8,9 @@ export enum RoleLevel {
 
 export type UserData = {
     userId: number;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
 };
 
 export type UserSettings = {
@@ -20,15 +20,18 @@ export type UserSettings = {
 export type Role = {
     id: RoleLevel;
     name: string;
+    parent: Role | null;
+};
+
+export type LeaveType = {
+    id: number;
+    name: string;
 };
 
 export type Leave = {
     id: number;
-    type: {
-        id: number;
-        name: string;
-    };
+    type: LeaveType;
     requester: UserData;
     reason: string;
 };
-export type Succeeded = 'yes' | 'no';
+export type Status = 'success' | 'failed';

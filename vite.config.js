@@ -7,6 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
+import caseShift from 'inertia-caseshift/vite';
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
@@ -15,7 +16,7 @@ export default defineConfig({
     input: ['resources/css/app.css', 'resources/js/app.tsx'],
     ssr: 'resources/js/ssr.jsx',
     refresh: true
-  }), react(), tailwindcss()],
+  }), react(), tailwindcss(), caseShift()],
   esbuild: {
     jsx: 'automatic'
   },

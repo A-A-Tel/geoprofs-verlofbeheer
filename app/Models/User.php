@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\LeaveStatus;
 use App\RoleLevel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -79,12 +80,12 @@ class User extends Authenticatable
 
     public function hasRoleLevel(RoleLevel $roleLevel): bool
     {
-        $role = $this;
+        $role = $this->role->withParents();
         do {
-            if ($role->id === $roleLevel) {
+            if ($role['id'] === $roleLevel->value) {
                 return true;
             }
-            $role = $role->parent;
+            $role = $role['parent'];
         } while ($role != null);
 
         return false;
@@ -105,7 +106,11 @@ class User extends Authenticatable
         }
         $servicePeriodEnds = $currentServicePeriod->copy()->addYear();
 
-        $leaves = $this->leaves()->whereBetween('start_on', [$currentServicePeriod, $servicePeriodEnds])->get();
+        $leaves = $this->leaves()
+            ->where('start_on', '>=', $currentServicePeriod)
+            ->where('start_on', '<', $servicePeriodEnds)
+            ->where('status', '!=', LeaveStatus::declined)
+            ->get();
 
         foreach ($leaves as $leave) {
             $days -= $leave->getAmountOfDays();

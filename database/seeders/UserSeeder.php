@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'email' => 'Afd.Eling@bedrijf.nl',
             'password' => 'Hallo12345%',
         ]);
-        $departmentManager->role()->associate(Role::findOrFail(RoleLevel::Manager));
+        $departmentManager->role()->associate(Role::findOrFail(RoleLevel::DepartmentManager));
         $departmentManager->department()->associate(Department::where('name', 'Geodesy')->firstOrFail());
         $departmentManager->save();
 
