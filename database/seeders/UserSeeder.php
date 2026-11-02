@@ -18,8 +18,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $officeManager = new User([
+            'email' => 'afd.eling@bedrijf.nl',
+            'password' => 'Hallo12345%',
+        ]);
+        $officeManager->role()->associate(Role::findOrFail(RoleLevel::OfficeManager));
+        $officeManager->department()->associate(Department::where('name', 'Office')->firstOrFail());
+        $officeManager->save();
+
         $departmentManager = new User([
-            'email' => 'Afd.Eling@bedrijf.nl',
+            'email' => 'afd.eling@bedrijf.nl',
             'password' => 'Hallo12345%',
         ]);
         $departmentManager->role()->associate(Role::findOrFail(RoleLevel::DepartmentManager));

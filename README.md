@@ -15,7 +15,6 @@ Voor het opzetten van de database voer je deze commando's uit:
 php artisan migrate:fresh --seed
 ```
 
-
 Je kan het project uitvoeren met:
 ```shell
 composer run dev
