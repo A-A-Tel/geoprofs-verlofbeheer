@@ -1,5 +1,6 @@
 import { UserListEntry } from '@/components/user-list/UserListEntry';
 import { UserData } from '@/types';
+import { Link } from '@inertiajs/react';
 
 export type UserListOverviewProps = {
     users: UserData[];
@@ -7,10 +8,15 @@ export type UserListOverviewProps = {
 
 export function UserList({ users }: UserListOverviewProps) {
     return (
-        <div className="flex flex-wrap items-center gap-3 p-5">
-            {users.map((user) => (
-                <UserListEntry key={user.user_id} id={user.user_id} first_name={user.first_name} last_name={user.last_name} />
-            ))}
+        <div className={'flex flex-col'}>
+            <Link className={'ml-5 w-65'} href={'#'}>
+                <button className={'bg-secondary text-text-primary w-65 rounded-md p-1'}>Nieuwe gebruiker aanmaken</button>
+            </Link>
+            <div className="flex flex-wrap items-center gap-3 p-5">
+                {users.map((user) => (
+                    <UserListEntry key={user.user_id} id={user.user_id} first_name={user.first_name} last_name={user.last_name} />
+                ))}
+            </div>
         </div>
     );
 }
