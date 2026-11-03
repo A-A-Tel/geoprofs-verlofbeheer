@@ -1,42 +1,133 @@
 import { Form } from '@inertiajs/react';
+import { RoleLevel } from '@/types/types';
 
-export function UserCreationModal() {
+function getRoleName(role: RoleLevel) {
+    switch (role) {
+        case RoleLevel.Employee: return 'Medewerker';
+        case RoleLevel.OfficeManager: return 'Kantoormanager';
+        case RoleLevel.Administrator: return 'Administrator';
+        case RoleLevel.DepartmentManager: return 'Afdelingsleider';
+        case RoleLevel.Manager: return 'Manager';
+    }
+}
+
+type Department = {
+    id: number;
+    name: string;
+};
+
+type Props = {
+    departments: Department[];
+};
+export function UserCreationModal({ departments }: Props) {
     return (
-        <div className={`grid h-screen w-full items-center`}>
+        <div className={`my-auto`}>
             <Form
-                className={'bg-primary-light text-text-primary border-text-secondary m-auto grid gap-12 rounded-3xl border-3 p-8 md:w-1/3'}
-                method="POST"
-                action={route('login')}
+                className={'bg-primary-light text-text-primary border-text-secondary m-auto w-full rounded-3xl border-3 p-8'}
+                method="post"
+                action={route('user-creation.create')}
             >
-                <div className={'grid flex-col gap-2'}>
-                    <div className={'text-3xl font-bold'}>Welkom</div>
-                    <div>Log in met naam en wachtwoord</div>
-                </div>
-                <div className={'grid flex-col gap-2'}>
-                    <div>Email</div>
+                <h1 className="text-3xl font-bold md:text-4xl">Gebruiker aanmaken</h1>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Naam</h2>
+                <div className={'flex gap-6'}>
                     <input
+                        name="first_name"
                         required
-                        name="email"
-                        placeholder={'regu.larjoe@bedrijf.nl'}
-                        type={'email'}
-                        className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
+                        type="text"
+                        placeholder={'Voornaam'}
+                        className="bg-primary-dark border-text-secondary flex w-full items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                     />
-                    <div>Wachtwoord</div>
                     <input
+                        name="last_name"
                         required
-                        name="password"
-                        placeholder={'*******'}
-                        type={'password'}
-                        className={'bg-primary-dark border-text-secondary rounded-md border-2 p-2'}
+                        type="text"
+                        placeholder={'Achternaam'}
+                        className="bg-primary-dark border-text-secondary flex w-full items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                     />
                 </div>
+
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Startdatum</h2>
+                <input
+                    name="start_on"
+                    required
+                    type="date"
+                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                />
+
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department</h2>
+                <select
+                    required
+                    name="department"
+                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                >
+                    {departments.map((department) => (
+                        <option key={department.id} value={department.id}>
+                            {department.name}
+                        </option>
+                    ))}
+                </select>
+
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
+                <select
+                    required
+                    name="roles"
+                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                >
+                    {Object.values(RoleLevel).map((role) => {
+                        if (typeof role === 'string') return;
+
+                        return (
+                            <option className={''} key={role} value={role}>
+                                {getRoleName(role)}
+                            </option>
+                        );
+                    })}
+                </select>
+
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Jaarlijks verloflimiet</h2>
+                <input
+                    type="number"
+                    name="yearly_leave"
+                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
+                    placeholder="Jaarlijkse hoeveelheid"
+                    max={255}
+                    required
+                />
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Telefoonnummer</h2>
+                <input
+                    type="tel"
+                    name="phone_number"
+                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
+                    placeholder="123 - 123 23 21"
+                    maxLength={16}
+                    pattern="\+?[0-9]{10,15}"
+                    required
+                />
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">BSN</h2>
+                <input
+                    type="text"
+                    name="citizen_service_number"
+                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
+                    placeholder="123456782"
+                    pattern="[0-9]{9}"
+                    maxLength={9}
+                    required
+                />
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Email</h2>
+                <input
+                    type="email"
+                    name="email"
+                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
+                    placeholder="voorbeeld@email.nl"
+                    required
+                />
                 <button
-                    type={'submit'}
+                    type="submit"
                     className={
-                        'bg-background border-text-secondary flex cursor-pointer items-center justify-center rounded-md border-2 p-2 font-bold'
+                        'bg-background border-text-secondary mt-9 flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold md:text-2xl'
                     }
                 >
-                    Inloggen
+                    Maken
                 </button>
             </Form>
         </div>
