@@ -31,8 +31,10 @@ type Props = {
 };
 export function UserCreationModal({ departments, users }: Props) {
     const [role, setRole] = useState(0);
+    const [department, setDepartment] = useState(0);
 
     let IsDepartment = true;
+    let showSupervisor = false;
 
     if (role == RoleLevel.OfficeManager){
         IsDepartment = false;
@@ -40,6 +42,13 @@ export function UserCreationModal({ departments, users }: Props) {
     if (role == RoleLevel.Administrator) {
         IsDepartment = false;
     }
+
+    if (role === RoleLevel.Employee) {
+        if (department !== 0) {
+            showSupervisor = true;
+        }
+    }
+
     return (
         <div className={`my-auto`}>
             <Form
@@ -79,8 +88,13 @@ export function UserCreationModal({ departments, users }: Props) {
                         <select
                             required
                             name="department"
+                            defaultValue=""
+                            onChange={(e) => setDepartment(Number(e.target.value))}
                             className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                         >
+                            <option value="" disabled>
+                                Kies een department
+                            </option>
                             {departments.map((department) => (
                                 <option key={department.id} value={department.id}>
                                     {department.name}
@@ -90,13 +104,46 @@ export function UserCreationModal({ departments, users }: Props) {
                     </>
                 )}
 
+                {showSupervisor && (
+                    <>
+                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Supervisor</h2>
+                        <select
+                            required
+                            name="supervisor"
+                            defaultValue=""
+                            className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                        >
+                            <option value="" disabled>
+                                Kies een supervisor
+                            </option>
+                            {users.map((user) => {
+                                if (user.role_id !== RoleLevel.Manager) {
+                                    return;
+                                }
+                                if (user.department_id !== department) {
+                                    return;
+                                }
+                                return (
+                                    <option key={user.id} value={user.id}>
+                                        {user.first_name} {user.last_name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                    </>
+                )}
+
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
                 <select
                     onChange={(e) => setRole(Number(e.target.value))}
                     required
                     name="roles"
+                    defaultValue=""
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 >
+                    <option value="" disabled>
+                        Kies een rol
+                    </option>
                     {Object.values(RoleLevel).map((role) => {
                         if (typeof role === 'string') return;
 
