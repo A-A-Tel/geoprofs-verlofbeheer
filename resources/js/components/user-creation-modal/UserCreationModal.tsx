@@ -1,5 +1,6 @@
 import { Form } from '@inertiajs/react';
 import { RoleLevel } from '@/types/types';
+import { useState } from 'react';
 
 function getRoleName(role: RoleLevel) {
     switch (role) {
@@ -20,6 +21,16 @@ type Props = {
     departments: Department[];
 };
 export function UserCreationModal({ departments }: Props) {
+    const [role, setRole] = useState(0);
+
+    let IsDepartment = true;
+
+    if (role == RoleLevel.OfficeManager){
+        IsDepartment = false;
+    }
+    if (role == RoleLevel.Administrator) {
+        IsDepartment = false;
+    }
     return (
         <div className={`my-auto`}>
             <Form
@@ -53,22 +64,26 @@ export function UserCreationModal({ departments }: Props) {
                     type="date"
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 />
-
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department</h2>
-                <select
-                    required
-                    name="department"
-                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
-                >
-                    {departments.map((department) => (
-                        <option key={department.id} value={department.id}>
-                            {department.name}
-                        </option>
-                    ))}
-                </select>
+                {IsDepartment && (
+                    <>
+                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department</h2>
+                        <select
+                            required
+                            name="department"
+                            className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                        >
+                            {departments.map((department) => (
+                                <option key={department.id} value={department.id}>
+                                    {department.name}
+                                </option>
+                            ))}
+                        </select>
+                    </>
+                )}
 
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
                 <select
+                    onChange={(e) => setRole(Number(e.target.value))}
                     required
                     name="roles"
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
