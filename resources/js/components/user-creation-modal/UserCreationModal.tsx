@@ -17,10 +17,19 @@ type Department = {
     name: string;
 };
 
+type User = {
+    id: number;
+    role_id: number;
+    department_id: number;
+    first_name: string;
+    last_name: string;
+};
+
 type Props = {
     departments: Department[];
+    users: User[];
 };
-export function UserCreationModal({ departments }: Props) {
+export function UserCreationModal({ departments, users }: Props) {
     const [role, setRole] = useState(0);
 
     let IsDepartment = true;
