@@ -44,8 +44,8 @@ export function UserCreationModal({ departments, users }: Props) {
         IsDepartment = false;
     }
 
-    if (role === RoleLevel.Employee) {
-        if (department !== 0) {
+    if (role == RoleLevel.Employee) {
+        if (department != 0) {
             showSupervisor = true;
         }
     }
