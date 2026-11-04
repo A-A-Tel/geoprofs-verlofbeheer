@@ -1,14 +1,19 @@
-import { Form } from '@inertiajs/react';
 import { Department, RoleLevel, User } from '@/types/types';
+import { Form } from '@inertiajs/react';
 import { useState } from 'react';
 
 function getRoleName(role: RoleLevel) {
     switch (role) {
-        case RoleLevel.Employee: return 'Medewerker';
-        case RoleLevel.OfficeManager: return 'Kantoormanager';
-        case RoleLevel.Administrator: return 'Administrator';
-        case RoleLevel.DepartmentManager: return 'Afdelingsleider';
-        case RoleLevel.Manager: return 'Manager';
+        case RoleLevel.Employee:
+            return 'Medewerker';
+        case RoleLevel.OfficeManager:
+            return 'Kantoormanager';
+        case RoleLevel.Administrator:
+            return 'Administrator';
+        case RoleLevel.DepartmentManager:
+            return 'Afdelingsleider';
+        case RoleLevel.Manager:
+            return 'Manager';
     }
 }
 
@@ -45,7 +50,7 @@ export function UserCreationModal({ departments, users }: Props) {
     let IsDepartment = true;
     let showSupervisor = false;
 
-    if (role == RoleLevel.OfficeManager){
+    if (role == RoleLevel.OfficeManager) {
         IsDepartment = false;
     }
     if (role == RoleLevel.Administrator) {
@@ -97,12 +102,7 @@ export function UserCreationModal({ departments, users }: Props) {
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 />
 
-                <input
-                    name="password"
-                    required
-                    type="hidden"
-                    value={password}
-                />
+                <input name="password" required type="hidden" value={password} />
 
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
                 <select

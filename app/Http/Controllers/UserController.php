@@ -83,7 +83,7 @@ class UserController extends Controller
         $userData->user()->associate($user);
         $userData->save();
 
-        return redirect()->route('user.index', ['success' => true]);
+        return redirect()->route('user.index', ['status' => 'success']);
     }
 
     public function edit(string $id) {}

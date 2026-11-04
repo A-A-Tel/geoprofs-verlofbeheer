@@ -7,9 +7,9 @@ export enum RoleLevel {
 }
 
 export type Department = {
-    id: number,
-    name: string,
-}
+    id: number;
+    name: string;
+};
 
 export type User = {
     data: UserData;

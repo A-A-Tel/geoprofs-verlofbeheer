@@ -5,7 +5,7 @@ import { Department, User } from '@/types';
 type UserCreateProps = {
     users: User[];
     departments: Department[];
-}
+};
 export default function Create({ users, departments }: UserCreateProps) {
     return (
         <Sidebar>
