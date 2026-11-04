@@ -38,20 +38,20 @@ class UserController extends Controller
         $data = $request->validated();
 
         if ($data['role_id'] == RoleLevel::OfficeManager) {
-            $data['department_id'] = StaticDepartments::Office;
+            $data['department_id'] = StaticDepartments::Office->value;
             $data['supervisor_id'] = null;
         } else {
-            if ($data['department_id'] === StaticDepartments::Office) {
+            if ($data['department_id'] === StaticDepartments::Office->value) {
                 return redirect()->back()->withErrors([
                     'department_id' => 'Deze afdeling is alleen voor kantoormanagers.',
                 ]);
             }
-            if ($data['supervisor_id'] == null && $data['role_id'] === RoleLevel::Employee) {
+            if (!isset($data['supervisor_id']) && $data['role_id'] === RoleLevel::Employee->value) {
                 return redirect()->back()->withErrors([
                     'role_id' => 'Medewerkers hebben een supervisor nodig',
                 ]);
             }
-            if ($data['role_id'] === RoleLevel::Manager) {
+            if ($data['role_id'] === RoleLevel::Manager->value) {
                 $departmentManager = Department::findOrFail($data['department_id'])->getManager();
                 if ($departmentManager == null) {
                     return redirect()->back()->withErrors([
@@ -64,7 +64,7 @@ class UserController extends Controller
         $user = new User($data);
         $user->role()->associate($data['role_id']);
         $user->department()->associate($data['department_id']);
-        if ($data['supervisor_id'] != null) {
+        if ($data['supervisor_id']?? false) {
             $user->supervisor()->associate($data['supervisor_id']);
         }
         $user->save();
