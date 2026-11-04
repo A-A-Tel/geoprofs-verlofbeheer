@@ -15,7 +15,8 @@ class UserCreationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_create_employee_as_office_manager() {
+    public function test_create_employee_as_office_manager()
+    {
         $user = User::factory()->officeManager()->create();
         $manager = User::factory()->manager()->create();
         auth()->login($user);
@@ -73,7 +74,8 @@ class UserCreationTest extends TestCase
         $this->assertEquals(User::class, $activity->subject_type);
     }
 
-    public function test_create_department_manager_as_office_manager() {
+    public function test_create_department_manager_as_office_manager()
+    {
         $user = User::factory()->officeManager()->create();
         $department = Department::factory()->create();
         auth()->login($user);

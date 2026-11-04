@@ -46,7 +46,7 @@ class UserController extends Controller
                     'department_id' => 'Deze afdeling is alleen voor kantoormanagers.',
                 ]);
             }
-            if (!isset($data['supervisor_id']) && $data['role_id'] === RoleLevel::Employee->value) {
+            if (! isset($data['supervisor_id']) && $data['role_id'] === RoleLevel::Employee->value) {
                 return redirect()->back()->withErrors([
                     'role_id' => 'Medewerkers hebben een supervisor nodig',
                 ]);
@@ -64,7 +64,7 @@ class UserController extends Controller
         $user = new User($data);
         $user->role()->associate($data['role_id']);
         $user->department()->associate($data['department_id']);
-        if ($data['supervisor_id']?? false) {
+        if ($data['supervisor_id'] ?? false) {
             $user->supervisor()->associate($data['supervisor_id']);
         }
         $user->save();

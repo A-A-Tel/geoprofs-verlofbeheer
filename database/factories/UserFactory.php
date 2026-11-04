@@ -8,7 +8,6 @@ use App\Models\User;
 use App\RoleLevel;
 use App\StaticDepartments;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -45,7 +44,7 @@ class UserFactory extends Factory
                 'phone_number' => '+3106'.Str::password(8, letters: false, numbers: true, symbols: false, spaces: false),
                 'citizen_service_number' => Str::password(9, letters: false, numbers: true, symbols: false, spaces: false),
                 'started_service_on' => Date::now(),
-                'annual_leave_days' => 30
+                'annual_leave_days' => 30,
             ]);
         });
     }
