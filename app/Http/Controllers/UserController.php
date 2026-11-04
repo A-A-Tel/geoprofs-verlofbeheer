@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $users = User::with('departments')->get()->toArray();
+        $users = User::with(['department', 'role', 'data'])->get()->toArray();
         $departments = Department::all()->toArray();
 
         return inertia('user/create', ['users' => $users, 'departments' => $departments]);
@@ -83,7 +83,7 @@ class UserController extends Controller
         $userData->user()->associate($user);
         $userData->save();
 
-        return redirect()->route('user.index', ['success' => true]);
+        return redirect()->route('user.index', ['status' => 'success']);
     }
 
     public function edit(string $id) {}
