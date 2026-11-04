@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('citizen_service_number', 9);
             $table->date('started_service_on');
             $table->tinyInteger('annual_leave_days')->unsigned();
-            $table->tinyInteger('remaining_leave')->unsigned();
             $table->timestamps();
         });
     }

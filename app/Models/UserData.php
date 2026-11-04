@@ -14,7 +14,6 @@ class UserData extends Model
         'citizen_service_number',
         'started_service_on',
         'annual_leave_days',
-        'remaining_leave',
     ];
 
     protected $hidden = [
@@ -22,7 +21,6 @@ class UserData extends Model
         'citizen_service_number',
         'started_service_on',
         'annual_leave_days',
-        'remaining_leave',
         'created_at',
         'updated_at',
     ];

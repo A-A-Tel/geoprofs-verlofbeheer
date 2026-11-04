@@ -61,7 +61,7 @@ class UserController extends Controller
                 $data['supervisor_id'] = $departmentManager->id;
             }
         }
-        $user = User::create($data);
+        $user = new User($data);
         $user->role()->associate($data['role_id']);
         $user->department()->associate($data['department_id']);
         if ($data['supervisor_id'] != null) {
@@ -69,11 +69,11 @@ class UserController extends Controller
         }
         $user->save();
 
-        $userSetting = UserSetting::create($data);
+        $userSetting = new UserSetting($data);
         $userSetting->user()->associate($user);
         $userSetting->save();
 
-        $userData = UserData::create($data);
+        $userData = new UserData($data);
         $userData->user()->associate($user);
         $userData->save();
 

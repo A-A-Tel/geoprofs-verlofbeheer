@@ -20,12 +20,6 @@ class UserFactory extends Factory
 {
     protected $model = User::class;
 
-    public function __construct($count = null, ?Collection $states = null, ?Collection $has = null, ?Collection $for = null, ?Collection $afterMaking = null, ?Collection $afterCreating = null, $connection = null, ?Collection $recycle = null, ?bool $expandRelationships = null, array $excludeRelationships = [])
-    {
-
-        parent::__construct($count, $states, $has, $for, $afterMaking, $afterCreating, $connection, $recycle, $expandRelationships, $excludeRelationships);
-    }
-
     public function definition(): array
     {
 
@@ -51,8 +45,7 @@ class UserFactory extends Factory
                 'phone_number' => '+3106'.Str::password(8, letters: false, numbers: true, symbols: false, spaces: false),
                 'citizen_service_number' => Str::password(9, letters: false, numbers: true, symbols: false, spaces: false),
                 'started_service_on' => Date::now(),
-                'annual_leave_days' => 30,
-                'remaining_leave' => 30,
+                'annual_leave_days' => 30
             ]);
         });
     }
