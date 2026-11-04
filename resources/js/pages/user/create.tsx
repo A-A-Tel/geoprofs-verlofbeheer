@@ -1,12 +1,15 @@
 import { Sidebar } from '@/components/sidebar';
 import { UserCreationModal } from '@/components/user-creation-modal';
-import { globalDepartmentData } from '@/testdata/TestdataDepartment';
-import { globalUserData } from '@/testdata/TestdataUser';
+import { Department, User } from '@/types';
 
-export default function Create() {
+type UserCreateProps = {
+    users: User[];
+    departments: Department[];
+}
+export default function Create({ users, departments }: UserCreateProps) {
     return (
         <Sidebar>
-            <UserCreationModal departments={globalDepartmentData} users={globalUserData} />
+            <UserCreationModal departments={departments} users={users} />
         </Sidebar>
     );
 }

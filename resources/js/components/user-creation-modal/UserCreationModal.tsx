@@ -1,5 +1,5 @@
 import { Form } from '@inertiajs/react';
-import { RoleLevel } from '@/types/types';
+import { Department, RoleLevel, User } from '@/types/types';
 import { useState } from 'react';
 
 function getRoleName(role: RoleLevel) {
@@ -12,27 +12,35 @@ function getRoleName(role: RoleLevel) {
     }
 }
 
-type Department = {
-    id: number;
-    name: string;
-};
+function generatePassword() {
+    const length = 12;
+    const numbers = '1234567890';
+    const symbols = '!@#$%^&*()_+{}[]|:;<>,.?/~';
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-type User = {
-    id: number;
-    role_id: number;
-    department_id: number;
-    first_name: string;
-    last_name: string;
-};
+    chars += numbers;
+    chars += symbols;
+
+    let password = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        password += chars[randomIndex];
+    }
+
+    return password;
+}
 
 type Props = {
     departments: Department[];
     users: User[];
 };
+
 export function UserCreationModal({ departments, users }: Props) {
     const [role, setRole] = useState(0);
     const [department, setDepartment] = useState(0);
     const [supervisor, setSupervisor] = useState(0);
+    const [password] = useState(generatePassword());
 
     let IsDepartment = true;
     let showSupervisor = false;
@@ -55,7 +63,10 @@ export function UserCreationModal({ departments, users }: Props) {
             <Form
                 className={'bg-primary-light text-text-primary border-text-secondary m-auto w-full rounded-3xl border-3 p-8'}
                 method="post"
-                action={route('user-creation.create')}
+                action={route('user.store')}
+                onSuccess={async () => {
+                    await navigator.clipboard.writeText(password);
+                }}
             >
                 <h1 className="text-3xl font-bold md:text-4xl">Gebruiker aanmaken</h1>
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Naam</h2>
@@ -80,10 +91,17 @@ export function UserCreationModal({ departments, users }: Props) {
 
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Startdatum</h2>
                 <input
-                    name="start_on"
+                    name="started_service_on"
                     required
                     type="date"
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                />
+
+                <input
+                    name="password"
+                    required
+                    type="hidden"
+                    value={password}
                 />
 
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
@@ -93,7 +111,7 @@ export function UserCreationModal({ departments, users }: Props) {
                         setSupervisor(0);
                     }}
                     required
-                    name="roles"
+                    name="role_id"
                     defaultValue=""
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 >
@@ -116,7 +134,7 @@ export function UserCreationModal({ departments, users }: Props) {
                         <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department</h2>
                         <select
                             required
-                            name="department"
+                            name="department_id"
                             value={department || ''}
                             onChange={(e) => {
                                 setDepartment(Number(e.target.value));
@@ -141,7 +159,7 @@ export function UserCreationModal({ departments, users }: Props) {
                         <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Supervisor</h2>
                         <select
                             required
-                            name="supervisor"
+                            name="supervisor_id"
                             defaultValue=""
                             value={supervisor || ''}
                             onChange={(e) => setSupervisor(Number(e.target.value))}
@@ -158,8 +176,8 @@ export function UserCreationModal({ departments, users }: Props) {
                                     return;
                                 }
                                 return (
-                                    <option key={user.id} value={user.id}>
-                                        {user.first_name} {user.last_name}
+                                    <option key={user.data.user_id} value={user.data.user_id}>
+                                        {user.data.first_name} {user.data.last_name}
                                     </option>
                                 );
                             })}
@@ -170,7 +188,7 @@ export function UserCreationModal({ departments, users }: Props) {
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Jaarlijks verloflimiet</h2>
                 <input
                     type="number"
-                    name="yearly_leave"
+                    name="annual_leave_days"
                     className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
                     placeholder="Jaarlijkse hoeveelheid"
                     max={255}
