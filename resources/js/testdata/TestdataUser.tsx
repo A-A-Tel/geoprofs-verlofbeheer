@@ -1,5 +1,5 @@
 export const globalUserData = [
-    { first_name: 'Regu', last_name: 'Larjoe', id: 1, action: '#' },
-    { first_name: 'Emp', last_name: 'Loyee', id: 2, action: '#' },
-    { first_name: 'Mana', last_name: 'ger', id: 3, action: '#' },
+    { id: 10, role_id: 2, department_id: 1, first_name: 'man', last_name: 'ager' },
+    { id: 11, role_id: 2, department_id: 2, first_name: 'Anouar', last_name: 'Tel' },
+    { id: 12, role_id: 2, department_id: 3, first_name: 'Bart', last_name: 'Peters' }
 ];
