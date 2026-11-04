@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\RoleLevel;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserCreateRequest extends FormRequest
 {
@@ -14,7 +15,9 @@ class UserCreateRequest extends FormRequest
     public function authorize(): bool
     {
         $user = auth()->user();
-        if (!$user) return false;
+        if (! $user) {
+            return false;
+        }
 
         return $user->hasRoleLevel(RoleLevel::OfficeManager);
     }
@@ -35,6 +38,9 @@ class UserCreateRequest extends FormRequest
             'started_service_on' => 'required|date',
             'annual_leave_days' => 'required|int|min:0|max:255',
             'password' => 'required',
+            'role_id' => ['required', Rule::enum(RoleLevel::class)],
+            'supervisor_id' => 'nullable|exists:users,id',
+            'department_id' => 'nullable|exists:departments,id',
         ];
     }
 }

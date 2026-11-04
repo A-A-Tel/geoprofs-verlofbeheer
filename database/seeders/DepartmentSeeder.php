@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Department;
+use App\StaticDepartments;
 use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
@@ -12,13 +13,15 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        Department::create([
-            'name' => 'ICT',
-        ])->save();
+        $ict = new Department;
+        $ict->id = StaticDepartments::Ict;
+        $ict->name = 'ICT';
+        $ict->save();
 
-        Department::create([
-            'name' => 'Office',
-        ])->save();
+        $office = new Department;
+        $office->id = StaticDepartments::Office;
+        $office->name = 'Office';
+        $office->save();
 
         Department::create([
             'name' => 'Geodesy',
