@@ -19,7 +19,7 @@ const entries: RoleSidebarEntries[] = [
         href: route('user.index'),
         label: 'Gebruikers inzien',
         icon: GroupIcon,
-        level: RoleLevel.Employee,
+        level: RoleLevel.OfficeManager,
     },
     {
         href: route('leave.index'),
