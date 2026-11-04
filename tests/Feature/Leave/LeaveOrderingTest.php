@@ -4,7 +4,7 @@ namespace Feature\Leave;
 
 use App\Models\Leave;
 use App\Models\LeaveType;
-use Database\Factories\UserFactory;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Activitylog\Models\Activity;
 use Tests\TestCase;
@@ -16,7 +16,8 @@ class LeaveOrderingTest extends TestCase
     public function test_user_can_order_leave()
     {
         $leaveType = LeaveType::where('name', 'Verlof')->firstOrFail();
-        $user = UserFactory::new()->geodesy()->create();
+        $user = User::factory()->employee()->create();
+        $user->save();
         auth()->login($user);
 
         $request = $this->post(route('leave.store'), [
@@ -31,6 +32,7 @@ class LeaveOrderingTest extends TestCase
         $activity = Activity::all()->last();
 
         $request->assertValid();
+        $request->assertRedirect();
         $this->assertEquals(5, $availableDays);
         $this->assertEquals(Leave::class, $activity->subject_type);
     }
@@ -38,7 +40,7 @@ class LeaveOrderingTest extends TestCase
     public function test_user_cannot_order_leave_in_the_past()
     {
         $leaveType = LeaveType::where('name', 'Verlof')->firstOrFail();
-        $user = UserFactory::new()->geodesy()->create();
+        $user = User::factory()->employee()->create();
         $this->actingAs($user);
 
         $response = $this->post(route('leave.store'), [
@@ -53,7 +55,7 @@ class LeaveOrderingTest extends TestCase
     public function test_user_cannot_order_leave_with_end_date_before_start_date()
     {
         $leaveType = LeaveType::where('name', 'Verlof')->firstOrFail();
-        $user = UserFactory::new()->geodesy()->create();
+        $user = User::factory()->employee()->create();
         $this->actingAs($user);
 
         $response = $this->post(route('leave.store'), [
@@ -69,7 +71,7 @@ class LeaveOrderingTest extends TestCase
     public function test_user_cannot_order_leave_if_insufficient_leave_days()
     {
         $leaveType = LeaveType::where('name', 'Verlof')->firstOrFail();
-        $user = UserFactory::new()->geodesy()->create();
+        $user = User::factory()->employee()->create();
         $this->actingAs($user);
 
         $response = $this->post(route('leave.store'), [
