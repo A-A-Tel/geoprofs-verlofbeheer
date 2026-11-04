@@ -17,7 +17,7 @@ class UserController extends Controller
     public function show(string $id) {}
 
     public function create() {
-        return inertia('user-creation/index');
+        return inertia('user/create');
     }
 
     public function store(LeaveCreateRequest $request) {}
