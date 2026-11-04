@@ -75,7 +75,6 @@ class UserSeeder extends Seeder
             'citizen_service_number' => '987654321',
             'started_service_on' => Date::now(),
             'annual_leave_days' => 30,
-            'remaining_leave' => 30,
         ]);
         $employeeData->user()->associate($employee);
         $employeeData->save();

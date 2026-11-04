@@ -6,6 +6,14 @@ export enum RoleLevel {
     Administrator = 5,
 }
 
+export type User = {
+    data: UserData;
+    setting: UserSetting;
+    role_id: RoleLevel;
+    department_id: number;
+    supervisor_id: number;
+};
+
 export type UserData = {
     user_id: number;
     first_name: string;
@@ -13,7 +21,7 @@ export type UserData = {
     phone_number: string;
 };
 
-export type UserSettings = {
+export type UserSetting = {
     notification_sound: boolean;
 };
 

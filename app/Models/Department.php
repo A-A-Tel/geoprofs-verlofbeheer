@@ -29,9 +29,9 @@ class Department extends Model
         return $this->hasMany(User::class, 'department_id');
     }
 
-    public function getManager(): User
+    public function getManager(): ?User
     {
-        return User::where(['role_id' => RoleLevel::DepartmentManager, 'department_id' => $this->id])->firstOrFail();
+        return User::where(['role_id' => RoleLevel::DepartmentManager, 'department_id' => $this->id])->first();
     }
 
     public function getActivitylogOptions(): LogOptions
