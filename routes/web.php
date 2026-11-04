@@ -6,9 +6,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('dashboard', []);
-})->name('dashboard');
 
 Route::get('/login', function () {
     return Inertia::render('login', []);
@@ -20,6 +17,9 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('dashboard', []);
+    })->name('dashboard');
     Route::resource('leave', LeaveController::class);
     Route::resource('user', UserController::class);
 });
