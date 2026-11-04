@@ -64,6 +64,7 @@ export function UserCreationModal({ departments, users }: Props) {
                         name="first_name"
                         required
                         type="text"
+                        maxLength={32}
                         placeholder={'Voornaam'}
                         className="bg-primary-dark border-text-secondary flex w-full items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                     />
@@ -71,6 +72,7 @@ export function UserCreationModal({ departments, users }: Props) {
                         name="last_name"
                         required
                         type="text"
+                        maxLength={32}
                         placeholder={'Achternaam'}
                         className="bg-primary-dark border-text-secondary flex w-full items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                     />
