@@ -27,7 +27,13 @@ class UserController extends Controller
 
     public function show(string $id) {}
 
-    public function create() {}
+    public function create()
+    {
+        $users = User::with('departments')->get()->toArray();
+        $departments = Department::all()->toArray();
+
+        return inertia('user/create', ['users' => $users, 'departments' => $departments]);
+    }
 
     public function store(UserCreateRequest $request)
     {
