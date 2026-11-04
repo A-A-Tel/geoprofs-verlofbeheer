@@ -32,6 +32,7 @@ type Props = {
 export function UserCreationModal({ departments, users }: Props) {
     const [role, setRole] = useState(0);
     const [department, setDepartment] = useState(0);
+    const [supervisor, setSupervisor] = useState(0);
 
     let IsDepartment = true;
     let showSupervisor = false;
@@ -82,14 +83,43 @@ export function UserCreationModal({ departments, users }: Props) {
                     type="date"
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 />
+
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
+                <select
+                    onChange={(e) => {
+                        setRole(Number(e.target.value));
+                        setSupervisor(0);
+                    }}
+                    required
+                    name="roles"
+                    defaultValue=""
+                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
+                >
+                    <option value="" disabled>
+                        Kies een rol
+                    </option>
+                    {Object.values(RoleLevel).map((role) => {
+                        if (typeof role === 'string') return;
+
+                        return (
+                            <option className={''} key={role} value={role}>
+                                {getRoleName(role)}
+                            </option>
+                        );
+                    })}
+                </select>
+
                 {IsDepartment && (
                     <>
                         <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department</h2>
                         <select
                             required
                             name="department"
-                            defaultValue=""
-                            onChange={(e) => setDepartment(Number(e.target.value))}
+                            value={department || ''}
+                            onChange={(e) => {
+                                setDepartment(Number(e.target.value));
+                                setSupervisor(0);
+                            }}
                             className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                         >
                             <option value="" disabled>
@@ -111,6 +141,8 @@ export function UserCreationModal({ departments, users }: Props) {
                             required
                             name="supervisor"
                             defaultValue=""
+                            value={supervisor || ''}
+                            onChange={(e) => setSupervisor(Number(e.target.value))}
                             className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                         >
                             <option value="" disabled>
@@ -132,28 +164,6 @@ export function UserCreationModal({ departments, users }: Props) {
                         </select>
                     </>
                 )}
-
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
-                <select
-                    onChange={(e) => setRole(Number(e.target.value))}
-                    required
-                    name="roles"
-                    defaultValue=""
-                    className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
-                >
-                    <option value="" disabled>
-                        Kies een rol
-                    </option>
-                    {Object.values(RoleLevel).map((role) => {
-                        if (typeof role === 'string') return;
-
-                        return (
-                            <option className={''} key={role} value={role}>
-                                {getRoleName(role)}
-                            </option>
-                        );
-                    })}
-                </select>
 
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Jaarlijks verloflimiet</h2>
                 <input
