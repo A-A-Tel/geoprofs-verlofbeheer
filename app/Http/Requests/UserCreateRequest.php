@@ -40,7 +40,7 @@ class UserCreateRequest extends FormRequest
             'password' => 'required',
             'role_id' => ['required', Rule::enum(RoleLevel::class)],
             'supervisor_id' => 'nullable|exists:users,id',
-            'department_id' => 'nullable|exists:departments,id',
+            'department_id' => 'required|exists:departments,id',
         ];
     }
 }

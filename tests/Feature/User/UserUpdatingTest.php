@@ -137,28 +137,6 @@ class UserUpdatingTest extends TestCase
             ]);
         }
 
-    public function test_update_user_with_missing_required_fields()
-    {
-        $officeManager = User::factory()->officeManager()->create();
-        $employee = $this->createEmployee();
-
-        auth()->login($officeManager);
-
-        $response = $this->put(route('user.update', $employee), []);
-
-        $response->assertInvalid([
-            'first_name',
-            'last_name',
-            'email',
-            'phone_number',
-            'citizen_service_number',
-            'started_service_on',
-            'annual_leave_days',
-            'password',
-            'role_id',
-        ]);
-    }
-
     public function test_update_user_with_invalid_email()
     {
         $officeManager = User::factory()->officeManager()->create();

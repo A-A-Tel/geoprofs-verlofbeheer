@@ -20,8 +20,8 @@ class UserUpdateRequest extends FormRequest {
             'annual_leave_days' => 'sometimes|int|min:0|max:255',
             'password' => 'sometimes',
             'role_id' => ['sometimes', Rule::enum(RoleLevel::class)],
-            'supervisor_id' => 'sometimes|exists:users,id',
-            'department_id' => 'sometimes|exists:departments,id',
+            'supervisor_id' => 'sometimes|nullable|exists:users,id',
+            'department_id' => 'sometimes|nullable|exists:departments,id',
         ];
     }
 }
