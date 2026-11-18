@@ -18,7 +18,6 @@ class User extends Authenticatable
     use LogsActivity;
 
     protected $hidden = [
-        'id',
         'password',
         'remember_token',
         'two_factor_secret',

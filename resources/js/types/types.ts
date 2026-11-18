@@ -12,6 +12,8 @@ export type Department = {
 };
 
 export type User = {
+    id: number;
+    email: string;
     data: UserData;
     setting: UserSetting;
     role_id: RoleLevel;

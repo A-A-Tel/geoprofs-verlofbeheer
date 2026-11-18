@@ -66,7 +66,10 @@ class UserController extends Controller
         return redirect()->route('user.index', ['success' => true]);
     }
 
-    public function edit(User $user) {}
+    public function edit(User $user) {
+
+        return inertia('user/edit', ['user' => $user]);
+    }
 
     public function update(UserUpdateRequest $request, User $user) {
         $data = $this->validateUserRequest($request);
