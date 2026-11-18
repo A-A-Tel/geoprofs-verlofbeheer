@@ -10,6 +10,7 @@ use App\Models\UserData;
 use App\Models\UserSetting;
 use App\RoleLevel;
 use App\StaticDepartments;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -98,7 +99,7 @@ class UserController extends Controller
 
     public function destroy(User $user) {}
 
-    private function validateUserRequest(UserCreateRequest $request): RedirectResponse|array
+    private function validateUserRequest(FormRequest $request): RedirectResponse|array
     {
         $data = $request->validated();
 
