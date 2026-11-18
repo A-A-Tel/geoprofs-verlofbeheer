@@ -6,6 +6,11 @@ export enum RoleLevel {
     Administrator = 5,
 }
 
+export type Department = {
+    id: number;
+    name: string;
+};
+
 export type User = {
     data: UserData;
     setting: UserSetting;

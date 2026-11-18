@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $users = User::with('departments')->get()->toArray();
+        $users = User::with(['department', 'role', 'data'])->get()->toArray();
         $departments = Department::all()->toArray();
 
         return inertia('user/create', ['users' => $users, 'departments' => $departments]);
@@ -97,7 +97,6 @@ class UserController extends Controller
                 $data['supervisor_id'] = $departmentManager->id;
             }
         }
-
         return $data;
     }
 }
