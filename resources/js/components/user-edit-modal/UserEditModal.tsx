@@ -73,7 +73,7 @@ export function UserEditModal({ departments, users }: Props) {
                     await navigator.clipboard.writeText(password);
                 }}
             >
-                <h1 className="text-3xl font-bold md:text-4xl">Gebruiker aanmaken</h1>
+                <h1 className="text-3xl font-bold md:text-4xl">Gebruiker bewerken</h1>
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Naam</h2>
                 <div className={'flex gap-6'}>
                     <input
@@ -222,14 +222,24 @@ export function UserEditModal({ departments, users }: Props) {
                     placeholder="voorbeeld@email.nl"
                     required
                 />
-                <button
-                    type="submit"
-                    className={
-                        'bg-background border-text-secondary mt-9 flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold md:text-2xl'
-                    }
-                >
-                    Maken
-                </button>
+                <div className={'flex gap-6'}>
+                    <button
+                        type="submit"
+                        className={
+                            'bg-secondary border-text-secondary mt-9 flex w-2/5 cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold md:text-2xl'
+                        }
+                    >
+                        Bewerken
+                    </button>
+                    <button
+                        type="submit"
+                        className={
+                            'border-text-secondary bg-accent-bad mt-9 flex w-2/5 cursor-pointer items-center justify-center rounded-md border-2 p-2 text-xl font-bold md:text-2xl'
+                        }
+                    >
+                        Verwijderen
+                    </button>
+                </div>
             </Form>
         </div>
     );

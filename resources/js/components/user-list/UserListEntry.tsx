@@ -9,7 +9,7 @@ export type UserListEntryProps = {
 
 export function UserListEntry({ first_name, last_name, id }: UserListEntryProps) {
     return (
-        <Link href={'/users/' + id}>
+        <Link href={'/user/' + id + '/edit'}>
             <div className={'text-text-primary flex font-bold'}>
                 <div className={'bg-primary-light border-text-secondary flex items-center gap-5 rounded-lg border-3 p-5'}>
                     <span className={'text-lg'}>
