@@ -27,8 +27,6 @@ class UserController extends Controller
         return inertia('user/index', ['users' => $users]);
     }
 
-    public function show(string $id) {}
-
     public function create()
     {
         $users = User::with(['department', 'role', 'data'])->get()->toArray();
@@ -68,10 +66,13 @@ class UserController extends Controller
         return redirect()->route('user.index', ['success' => true]);
     }
 
-    public function edit(User $user)
+    public function edit(int $id)
     {
+        $user = User::with(['department', 'role', 'data'])->findOrFail($id);
+        $users = User::with(['department', 'role', 'data'])->get()->toArray();
+        $departments = Department::all()->toArray();
 
-        return inertia('user/edit', ['user' => $user]);
+        return inertia('user/edit', ['user' => $user, 'users' => $users, 'departments' => $departments]);
     }
 
     public function update(UserUpdateRequest $request, User $user)

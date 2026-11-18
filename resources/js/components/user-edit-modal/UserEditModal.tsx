@@ -36,12 +36,13 @@ function generatePassword() {
     return password;
 }
 
-type Props = {
+type UserEditModelProps = {
     departments: Department[];
     users: User[];
+    user: User;
 };
 
-export function UserUpdateModal({ departments, users }: Props) {
+export function UserEditModal({ departments, users, user }: UserEditModelProps) {
     const [role, setRole] = useState(0);
     const [department, setDepartment] = useState(0);
     const [supervisor, setSupervisor] = useState(0);
@@ -74,11 +75,12 @@ export function UserUpdateModal({ departments, users }: Props) {
                 }}
             >
                 <h1 className="text-3xl font-bold md:text-4xl">Gebruiker bewerken</h1>
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Naam</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Naam *</h2>
                 <div className={'flex gap-6'}>
                     <input
                         name="first_name"
                         required
+                        defaultValue={user.data.first_name}
                         type="text"
                         maxLength={32}
                         placeholder={'Voornaam'}
@@ -87,6 +89,7 @@ export function UserUpdateModal({ departments, users }: Props) {
                     <input
                         name="last_name"
                         required
+                        defaultValue={user.data.last_name}
                         type="text"
                         maxLength={32}
                         placeholder={'Achternaam'}
@@ -94,17 +97,18 @@ export function UserUpdateModal({ departments, users }: Props) {
                     />
                 </div>
 
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Startdatum</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Startdatum *</h2>
                 <input
                     name="started_service_on"
                     required
+                    defaultValue={user.data.started_service_on.substring(0, 10)}
                     type="date"
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 />
 
-                <input name="password" required type="hidden" value={password} />
+                <input name="password" required type="hidden" value={user.id} />
 
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen *</h2>
                 <select
                     onChange={(e) => {
                         setRole(Number(e.target.value));
@@ -112,7 +116,7 @@ export function UserUpdateModal({ departments, users }: Props) {
                     }}
                     required
                     name="role_id"
-                    defaultValue=""
+                    defaultValue={user.role_id}
                     className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                 >
                     <option value="" disabled>
@@ -131,11 +135,11 @@ export function UserUpdateModal({ departments, users }: Props) {
 
                 {IsDepartment && (
                     <>
-                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department</h2>
+                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department *</h2>
                         <select
                             required
                             name="department_id"
-                            value={department || ''}
+                            defaultValue={user.department_id}
                             onChange={(e) => {
                                 setDepartment(Number(e.target.value));
                                 setSupervisor(0);
@@ -156,12 +160,11 @@ export function UserUpdateModal({ departments, users }: Props) {
 
                 {showSupervisor && (
                     <>
-                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Supervisor</h2>
+                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Supervisor *</h2>
                         <select
                             required
                             name="supervisor_id"
-                            defaultValue=""
-                            value={supervisor || ''}
+                            defaultValue={user.department_id}
                             onChange={(e) => setSupervisor(Number(e.target.value))}
                             className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                         >
@@ -185,18 +188,20 @@ export function UserUpdateModal({ departments, users }: Props) {
                     </>
                 )}
 
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Jaarlijks verloflimiet</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Jaarlijks verloflimiet *</h2>
                 <input
                     type="number"
                     name="annual_leave_days"
+                    defaultValue={user.data.annual_leave_days}
                     className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
                     placeholder="Jaarlijkse hoeveelheid"
                     max={255}
                     required
                 />
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Telefoonnummer</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Telefoonnummer *</h2>
                 <input
                     type="tel"
+                    defaultValue={user.data.phone_number}
                     name="phone_number"
                     className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
                     placeholder="123 - 123 23 21"
@@ -212,11 +217,11 @@ export function UserUpdateModal({ departments, users }: Props) {
                     placeholder="123456782"
                     pattern="[0-9]{9}"
                     maxLength={9}
-                    required
                 />
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Email</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Email *</h2>
                 <input
                     type="email"
+                    defaultValue={user.email}
                     name="email"
                     className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
                     placeholder="voorbeeld@email.nl"

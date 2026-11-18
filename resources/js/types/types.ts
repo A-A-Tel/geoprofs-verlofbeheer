@@ -26,6 +26,8 @@ export type UserData = {
     first_name: string;
     last_name: string;
     phone_number: string;
+    started_service_on: string;
+    annual_leave_days: number;
 };
 
 export type UserSetting = {
