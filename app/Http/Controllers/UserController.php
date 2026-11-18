@@ -10,6 +10,7 @@ use App\Models\UserData;
 use App\Models\UserSetting;
 use App\RoleLevel;
 use App\StaticDepartments;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -44,6 +45,8 @@ class UserController extends Controller
         }
         $data = $this->validateUserRequest($request);
 
+        if ($data instanceof RedirectResponse) return $data;
+
         $user = new User($data);
         $user->role()->associate($data['role_id']);
         $user->department()->associate($data['department_id']);
@@ -66,11 +69,27 @@ class UserController extends Controller
     public function edit(User $user) {}
 
     public function update(UserUpdateRequest $request, User $user) {
+        $data = $this->validateUserRequest($request);
+
+        if ($data instanceof RedirectResponse) return $data;
+
+        $user->role()->associate($data['role_id']);
+        $user->department()->associate($data['department_id']);
+        if ($data['supervisor_id'] ?? false) {
+            $user->supervisor()->associate($data['supervisor_id']);
+        }
+        $user->save();
+
+        $userData = UserData::where('user_id', $user->id)->firstOrFail();
+        $userData->user()->associate($user);
+        $userData->save();
+
+        return redirect()->route('user.index', ['success' => true]);
     }
 
     public function destroy(User $user) {}
 
-    private function validateUserRequest(UserCreateRequest $request): mixed {
+    private function validateUserRequest(UserCreateRequest $request): RedirectResponse|array {
         $data = $request->validated();
 
         if ($data['role_id'] == RoleLevel::OfficeManager) {
