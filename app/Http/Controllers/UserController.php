@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Department;
 use App\Models\User;
 use App\Models\UserData;
@@ -41,6 +42,35 @@ class UserController extends Controller
         if ($user == null || ! $user->hasRoleLevel(RoleLevel::OfficeManager)) {
             return redirect()->route('dashboard');
         }
+        $data = $this->validateUserRequest($request);
+
+        $user = new User($data);
+        $user->role()->associate($data['role_id']);
+        $user->department()->associate($data['department_id']);
+        if ($data['supervisor_id'] ?? false) {
+            $user->supervisor()->associate($data['supervisor_id']);
+        }
+        $user->save();
+
+        $userSetting = new UserSetting($data);
+        $userSetting->user()->associate($user);
+        $userSetting->save();
+
+        $userData = new UserData($data);
+        $userData->user()->associate($user);
+        $userData->save();
+
+        return redirect()->route('user.index', ['success' => true]);
+    }
+
+    public function edit(User $user) {}
+
+    public function update(UserUpdateRequest $request, User $user) {
+    }
+
+    public function destroy(User $user) {}
+
+    private function validateUserRequest(UserCreateRequest $request): mixed {
         $data = $request->validated();
 
         if ($data['role_id'] == RoleLevel::OfficeManager) {
@@ -67,28 +97,7 @@ class UserController extends Controller
                 $data['supervisor_id'] = $departmentManager->id;
             }
         }
-        $user = new User($data);
-        $user->role()->associate($data['role_id']);
-        $user->department()->associate($data['department_id']);
-        if ($data['supervisor_id'] ?? false) {
-            $user->supervisor()->associate($data['supervisor_id']);
-        }
-        $user->save();
 
-        $userSetting = new UserSetting($data);
-        $userSetting->user()->associate($user);
-        $userSetting->save();
-
-        $userData = new UserData($data);
-        $userData->user()->associate($user);
-        $userData->save();
-
-        return redirect()->route('user.index', ['success' => true]);
+        return $data;
     }
-
-    public function edit(string $id) {}
-
-    public function update(string $id) {}
-
-    public function destroy(string $id) {}
 }
