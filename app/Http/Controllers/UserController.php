@@ -84,8 +84,7 @@ class UserController extends Controller
             return $data;
         }
 
-        if (array_key_exists('role_id', $data))
-        {
+        if (array_key_exists('role_id', $data)) {
             $user->role()->associate($data['role_id']);
         }
 
@@ -106,9 +105,7 @@ class UserController extends Controller
         return redirect()->route('user.index', ['success' => true]);
     }
 
-    public function destroy(User $user) {
-
-    }
+    public function destroy(User $user) {}
 
     private function validateUserRequest(FormRequest $request): RedirectResponse|array
     {
@@ -141,20 +138,24 @@ class UserController extends Controller
                 $data['supervisor_id'] = $departmentManager->id;
             }
         }
+
         return $data;
     }
 
     private function compareArrKeyIfSet(array $array, string $key, mixed $comparable): bool
     {
-        if (!array_key_exists($key, $array)) return false;
-
+        if (! array_key_exists($key, $array)) {
+            return false;
+        }
 
         return $array[$key] === $comparable;
     }
 
     private function checkArrKeyIfSet(array $array, string $key): bool
     {
-        if (!array_key_exists($key, $array)) return false;
+        if (! array_key_exists($key, $array)) {
+            return false;
+        }
 
         return $array[$key] == true;
     }

@@ -114,28 +114,28 @@ class UserUpdatingTest extends TestCase
         ]);
     }
 
-        public function test_update_user_to_office_manager()
-        {
-            $officeManager = User::factory()->officeManager()->create();
-            $employee = $this->createEmployee();
+    public function test_update_user_to_office_manager()
+    {
+        $officeManager = User::factory()->officeManager()->create();
+        $employee = $this->createEmployee();
 
-            auth()->login($officeManager);
+        auth()->login($officeManager);
 
-            $response = $this->put(route('user.update', $employee), $this->validUpdateData([
-                'role_id' => RoleLevel::OfficeManager->value,
-                'department_id' => StaticDepartments::Office->value,
-            ]));
+        $response = $this->put(route('user.update', $employee), $this->validUpdateData([
+            'role_id' => RoleLevel::OfficeManager->value,
+            'department_id' => StaticDepartments::Office->value,
+        ]));
 
-            $response->assertValid();
-            $response->assertRedirect();
+        $response->assertValid();
+        $response->assertRedirect();
 
-            $this->assertDatabaseHas('users', [
-                'id' => $employee->id,
-                'role_id' => RoleLevel::OfficeManager->value,
-                'department_id' => StaticDepartments::Office->value,
-                'supervisor_id' => null,
-            ]);
-        }
+        $this->assertDatabaseHas('users', [
+            'id' => $employee->id,
+            'role_id' => RoleLevel::OfficeManager->value,
+            'department_id' => StaticDepartments::Office->value,
+            'supervisor_id' => null,
+        ]);
+    }
 
     public function test_update_user_with_invalid_email()
     {
