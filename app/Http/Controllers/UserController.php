@@ -45,7 +45,9 @@ class UserController extends Controller
         }
         $data = $this->validateUserRequest($request);
 
-        if ($data instanceof RedirectResponse) return $data;
+        if ($data instanceof RedirectResponse) {
+            return $data;
+        }
 
         $user = new User($data);
         $user->role()->associate($data['role_id']);
@@ -66,15 +68,19 @@ class UserController extends Controller
         return redirect()->route('user.index', ['success' => true]);
     }
 
-    public function edit(User $user) {
+    public function edit(User $user)
+    {
 
         return inertia('user/edit', ['user' => $user]);
     }
 
-    public function update(UserUpdateRequest $request, User $user) {
+    public function update(UserUpdateRequest $request, User $user)
+    {
         $data = $this->validateUserRequest($request);
 
-        if ($data instanceof RedirectResponse) return $data;
+        if ($data instanceof RedirectResponse) {
+            return $data;
+        }
 
         $user->role()->associate($data['role_id']);
         $user->department()->associate($data['department_id']);
@@ -92,7 +98,8 @@ class UserController extends Controller
 
     public function destroy(User $user) {}
 
-    private function validateUserRequest(UserCreateRequest $request): RedirectResponse|array {
+    private function validateUserRequest(UserCreateRequest $request): RedirectResponse|array
+    {
         $data = $request->validated();
 
         if ($data['role_id'] == RoleLevel::OfficeManager) {
@@ -119,6 +126,7 @@ class UserController extends Controller
                 $data['supervisor_id'] = $departmentManager->id;
             }
         }
+
         return $data;
     }
 }
