@@ -41,7 +41,7 @@ type Props = {
     users: User[];
 };
 
-export function UserEditModal({ departments, users }: Props) {
+export function UserUpdateModal({ departments, users }: Props) {
     const [role, setRole] = useState(0);
     const [department, setDepartment] = useState(0);
     const [supervisor, setSupervisor] = useState(0);

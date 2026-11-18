@@ -86,14 +86,14 @@ class UserController extends Controller
         return redirect()->route('user.index', ['status' => 'success']);
     }
 
-    public function edit() {
+    public function edit(string $id) {}
+
+    public function update(string $id) {
         $users = User::with(['department', 'role', 'data'])->get()->toArray();
         $departments = Department::all()->toArray();
 
-        return inertia('user/edit', ['users' => $users, 'departments' => $departments]);
+        return inertia('user/' . $id, ['users' => $users, 'departments' => $departments]);
     }
-
-    public function update(string $id) {}
 
     public function destroy(string $id) {}
 }
