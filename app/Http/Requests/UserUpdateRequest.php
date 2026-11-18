@@ -13,7 +13,11 @@ class UserUpdateRequest extends FormRequest {
         return [
             'first_name' => 'sometimes|max:32',
             'last_name' => 'sometimes|max:32',
-            'email' => 'sometimes|email|unique:users,email',
+            'email' => [
+                'sometimes',
+                'email',
+                Rule::unique('users', 'email')->ignore($this->route('user')),
+            ],
             'phone_number' => 'sometimes|max:16',
             'citizen_service_number' => 'sometimes|max:9',
             'started_service_on' => 'sometimes|date',

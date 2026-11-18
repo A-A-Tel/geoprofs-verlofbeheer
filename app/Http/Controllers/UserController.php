@@ -84,16 +84,18 @@ class UserController extends Controller
             return $data;
         }
 
-        if (isset($data['role_id']))
+        if (array_key_exists('role_id', $data))
         {
             $user->role()->associate($data['role_id']);
         }
 
-        if (isset($data['department_id'])) {
+        if (array_key_exists('department_id', $data)) {
             $user->department()->associate($data['department_id']);
         }
 
-        $user->supervisor()->associate($data['supervisor_id']);
+        if (array_key_exists('supervisor_id', $data)) {
+            $user->supervisor()->associate($data['supervisor_id']);
+        }
 
         $user->save();
 
@@ -139,16 +141,12 @@ class UserController extends Controller
                 $data['supervisor_id'] = $departmentManager->id;
             }
         }
-
-        if (!$this->checkArrKeyIfSet($data, 'supervisor_id')) {
-            $data['supervisor_id'] = null;
-        }
         return $data;
     }
 
     private function compareArrKeyIfSet(array $array, string $key, mixed $comparable): bool
     {
-        if (!isset($array[$key])) return false;
+        if (!array_key_exists($key, $array)) return false;
 
 
         return $array[$key] === $comparable;
@@ -156,7 +154,7 @@ class UserController extends Controller
 
     private function checkArrKeyIfSet(array $array, string $key): bool
     {
-        if (!isset($array[$key])) return false;
+        if (!array_key_exists($key, $array)) return false;
 
         return $array[$key] == true;
     }

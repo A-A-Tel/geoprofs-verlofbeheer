@@ -254,6 +254,23 @@ class UserUpdatingTest extends TestCase
         ]);
     }
 
+    public function test_update_employee_with_same_email()
+    {
+        $officeManager = User::factory()->officeManager()->create();
+        $employee = $this->createEmployee();
+
+        auth()->login($officeManager);
+
+        $response = $this->put(route('user.update', $employee), [
+            'email' => $employee->email,
+        ]);
+
+        var_dump($response->baseRequest->array());
+
+        $response->assertValid();
+        $response->assertRedirect();
+    }
+
     public function test_employee_cannot_have_no_supervisor()
     {
         $officeManager = User::factory()->officeManager()->create();
