@@ -96,6 +96,15 @@ export function UserEditModal({ departments, users, user }: UserEditModelProps) 
                         className="bg-primary-dark border-text-secondary flex w-full items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                     />
                 </div>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Email *</h2>
+                <input
+                    type="email"
+                    defaultValue={user.email}
+                    name="email"
+                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
+                    placeholder="voorbeeld@email.nl"
+                    required
+                />
 
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Startdatum *</h2>
                 <input
@@ -108,7 +117,7 @@ export function UserEditModal({ departments, users, user }: UserEditModelProps) 
 
                 <input name="password" required type="hidden" value={user.id} />
 
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen *</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rol *</h2>
                 <select
                     onChange={(e) => {
                         setRole(Number(e.target.value));
@@ -135,7 +144,7 @@ export function UserEditModal({ departments, users, user }: UserEditModelProps) 
 
                 {IsDepartment && (
                     <>
-                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department *</h2>
+                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Afdeling *</h2>
                         <select
                             required
                             name="department_id"
@@ -217,15 +226,6 @@ export function UserEditModal({ departments, users, user }: UserEditModelProps) 
                     placeholder="123456782"
                     pattern="[0-9]{9}"
                     maxLength={9}
-                />
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Email *</h2>
-                <input
-                    type="email"
-                    defaultValue={user.email}
-                    name="email"
-                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
-                    placeholder="voorbeeld@email.nl"
-                    required
                 />
                 <div className={'flex gap-6'}>
                     <button

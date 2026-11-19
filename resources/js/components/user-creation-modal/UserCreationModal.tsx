@@ -93,7 +93,14 @@ export function UserCreationModal({ departments, users }: Props) {
                         className="bg-primary-dark border-text-secondary flex w-full items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
                     />
                 </div>
-
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Email</h2>
+                <input
+                    type="email"
+                    name="email"
+                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
+                    placeholder="voorbeeld@email.nl"
+                    required
+                />
                 <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Startdatum</h2>
                 <input
                     name="started_service_on"
@@ -104,7 +111,7 @@ export function UserCreationModal({ departments, users }: Props) {
 
                 <input name="password" required type="hidden" value={password} />
 
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rollen</h2>
+                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Rol</h2>
                 <select
                     onChange={(e) => {
                         setRole(Number(e.target.value));
@@ -131,7 +138,7 @@ export function UserCreationModal({ departments, users }: Props) {
 
                 {IsDepartment && (
                     <>
-                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Department</h2>
+                        <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Afdeling</h2>
                         <select
                             required
                             name="department_id"
@@ -212,14 +219,6 @@ export function UserCreationModal({ departments, users }: Props) {
                     placeholder="123456782"
                     pattern="[0-9]{9}"
                     maxLength={9}
-                    required
-                />
-                <h2 className="mt-9 mb-4 text-xl font-semibold md:text-2xl">Email</h2>
-                <input
-                    type="email"
-                    name="email"
-                    className="bg-primary-dark border-text-secondary w-full rounded-md border-2 p-2 text-lg md:text-xl"
-                    placeholder="voorbeeld@email.nl"
                     required
                 />
                 <button
