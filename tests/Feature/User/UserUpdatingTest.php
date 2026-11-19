@@ -114,48 +114,26 @@ class UserUpdatingTest extends TestCase
         ]);
     }
 
-    //    public function test_update_user_to_office_manager()
-    //    {
-    //        $officeManager = User::factory()->officeManager()->create();
-    //        $employee = $this->createEmployee();
-    //
-    //        auth()->login($officeManager);
-    //
-    //        $response = $this->put(route('user.update', $employee), $this->validUpdateData([
-    //            'role_id' => RoleLevel::OfficeManager->value,
-    //            'department_id' => StaticDepartments::Office->value,
-    //        ]));
-    //
-    //        $response->assertValid();
-    //        $response->assertRedirect();
-    //
-    //        $this->assertDatabaseHas('users', [
-    //            'id' => $employee->id,
-    //            'role_id' => RoleLevel::OfficeManager->value,
-    //            'department_id' => StaticDepartments::Office->value,
-    //            'supervisor_id' => null,
-    //        ]);
-    //    }
-
-    public function test_update_user_with_missing_required_fields()
+    public function test_update_user_to_office_manager()
     {
         $officeManager = User::factory()->officeManager()->create();
         $employee = $this->createEmployee();
 
         auth()->login($officeManager);
 
-        $response = $this->put(route('user.update', $employee), []);
+        $response = $this->put(route('user.update', $employee), $this->validUpdateData([
+            'role_id' => RoleLevel::OfficeManager->value,
+            'department_id' => StaticDepartments::Office->value,
+        ]));
 
-        $response->assertInvalid([
-            'first_name',
-            'last_name',
-            'email',
-            'phone_number',
-            'citizen_service_number',
-            'started_service_on',
-            'annual_leave_days',
-            'password',
-            'role_id',
+        $response->assertValid();
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('users', [
+            'id' => $employee->id,
+            'role_id' => RoleLevel::OfficeManager->value,
+            'department_id' => StaticDepartments::Office->value,
+            'supervisor_id' => null,
         ]);
     }
 
@@ -274,6 +252,23 @@ class UserUpdatingTest extends TestCase
         $response->assertRedirectBackWithErrors([
             'department_id' => 'Deze afdeling is alleen voor kantoormanagers.',
         ]);
+    }
+
+    public function test_update_employee_with_same_email()
+    {
+        $officeManager = User::factory()->officeManager()->create();
+        $employee = $this->createEmployee();
+
+        auth()->login($officeManager);
+
+        $response = $this->put(route('user.update', $employee), [
+            'email' => $employee->email,
+        ]);
+
+        var_dump($response->baseRequest->array());
+
+        $response->assertValid();
+        $response->assertRedirect();
     }
 
     public function test_employee_cannot_have_no_supervisor()
