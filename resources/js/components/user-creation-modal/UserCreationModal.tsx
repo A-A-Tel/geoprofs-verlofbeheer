@@ -167,7 +167,6 @@ export function UserCreationModal({ departments, users }: Props) {
                         <select
                             required
                             name="supervisor_id"
-                            defaultValue=""
                             value={supervisor || ''}
                             onChange={(e) => setSupervisor(Number(e.target.value))}
                             className="bg-primary-dark border-text-secondary flex w-full cursor-pointer items-center justify-center rounded-md border-2 p-2 text-lg font-bold md:text-xl"
